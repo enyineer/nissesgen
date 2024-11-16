@@ -3,7 +3,7 @@ import { gameMath } from "../gameMath";
 import { useFarmerStore } from "../stores/farmerStore";
 import { useMemo } from "react";
 
-export const FARMER_UNLOCK_COST = gameMath.bignumber("1e10");
+export const FARMER_UNLOCK_COST = gameMath.bignumber("1e5");
 
 export const FARMER_MULTIPLIER_BASE = gameMath.bignumber("1");
 export const FARMER_MULTIPLIER_PER_LEVEL = gameMath.bignumber("0.1");
