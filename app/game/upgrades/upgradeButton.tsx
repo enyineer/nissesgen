@@ -25,7 +25,7 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
       scoreStore.removeScore(props.cost);
       props.onSuccess();
     }
-  }, [scoreStore]);
+  }, [disabled, props, scoreStore]);
 
   return (
     <Button

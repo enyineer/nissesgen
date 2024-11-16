@@ -3,6 +3,8 @@
     "bradlc.vscode-tailwindcss",
     "austenc.tailwind-docs",
     "vivaxy.vscode-conventional-commits",
-    "heybourn.headwind"
+    "heybourn.headwind",
+    "rvest.vs-code-prettier-eslint",
+    "dbaeumer.vscode-eslint"
   ]
 }

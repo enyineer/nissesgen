@@ -24,7 +24,7 @@ export default function SettingsPage() {
           statsStore.reset();
         }}
       >
-        Reset Game (Can't be undone!)
+        Reset Game (Can&apos;t be undone!)
       </Button>
     </div>
   );

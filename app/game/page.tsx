@@ -15,7 +15,7 @@ export default function GamePage() {
   const handleClick = useCallback(() => {
     scoreStore.addScore(generatorTickFactor);
     statsStore.incrementClicks(gameMath.bignumber("1"));
-  }, [scoreStore, statsStore]);
+  }, [generatorTickFactor, scoreStore, statsStore]);
 
   return (
     <div className="flex flex-col h-full">

@@ -23,7 +23,7 @@ export default function UnlockGate(props: PropsWithChildren<UnlockGateProps>) {
       scoreStore.removeScore(props.cost);
       props.onSuccess();
     }
-  }, [scoreStore]);
+  }, [disabled, props, scoreStore]);
 
   if (!props.locked) {
     return props.children;
