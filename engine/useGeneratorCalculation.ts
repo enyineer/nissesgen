@@ -18,7 +18,7 @@ export function useGeneratorCalculation() {
 
   const generatorExponent: BigNumber = useMemo(() => {
     return gameMath.evaluate(
-      `${GENERATOR_EXPONENT_BASE} + ((${generatorStore.exponentLevel} - 1) * ${GENERATOR_EXPONENT_PER_LEVEL})`
+      `${GENERATOR_EXPONENT_BASE} + ((${generatorStore.exponentLevel}) * ${GENERATOR_EXPONENT_PER_LEVEL})`
     );
   }, [generatorStore.exponentLevel]);
   const generatorExponentCost: BigNumber = useMemo(() => {

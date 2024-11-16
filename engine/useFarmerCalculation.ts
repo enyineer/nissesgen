@@ -20,7 +20,7 @@ export function useFarmerCalculation() {
 
   const farmerExponent: BigNumber = useMemo(() => {
     return gameMath.evaluate(
-      `${FARMER_EXPONENT_BASE} + ((${farmerStore.exponentLevel} - 1) * ${FARMER_EXPONENT_PER_LEVEL})`
+      `${FARMER_EXPONENT_BASE} + ((${farmerStore.exponentLevel}) * ${FARMER_EXPONENT_PER_LEVEL})`
     );
   }, [farmerStore.exponentLevel]);
   const farmerExponentCost: BigNumber = useMemo(() => {
