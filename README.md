@@ -20,3 +20,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Deployment
 
 Open a PR, after it was merged to main, it will be deployed automatically to [nisses.enking.dev](nisses.enking.dev)
+
+## Migrating Zustand Storage
+
+> [!WARNING]
+> Keep in mind to create Zustand Storage Migrations when changing a store!
+
+See more information at [Persisting Store Data / Migrate](https://zustand.docs.pmnd.rs/integrations/persisting-store-data#migrate)
