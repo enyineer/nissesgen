@@ -32,6 +32,7 @@ export const useFarmerStore = create<FarmerState>()(
           set(() => ({
             level: gameMath.bignumber("1"),
             exponentLevel: gameMath.bignumber("1"),
+            unlocked: false,
           })),
       }),
       {
