@@ -7,7 +7,7 @@ export default function ScoreDisplay() {
   const scoreStore = useScoreStore();
   return (
     <div className="text-xl text-right">
-      Current Nisses: {gameMath.format(scoreStore.score)} Nisses
+      Current Nisses: {gameMath.format(scoreStore.score, 4)} Nisses
     </div>
   );
 }
