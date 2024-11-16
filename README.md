@@ -27,3 +27,9 @@ Open a PR, after it was merged to main, it will be deployed automatically to [ni
 > Keep in mind to create Zustand Storage Migrations when changing a store!
 
 See more information at [Persisting Store Data / Migrate](https://zustand.docs.pmnd.rs/integrations/persisting-store-data#migrate)
+
+## Important Documentation
+
+- [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction)
+- [Mathjs](https://mathjs.org/)
+- [Nextjs](https://nextjs.org/docs)
