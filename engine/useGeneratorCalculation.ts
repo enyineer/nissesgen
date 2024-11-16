@@ -3,7 +3,7 @@ import { gameMath } from "../gameMath";
 import { useGeneratorStore } from "../stores/generatorStore";
 import { useMemo } from "react";
 
-export const GENERATOR_MULTIPLAYER_BASE = gameMath.bignumber("1");
+export const GENERATOR_MULTIPLIER_BASE = gameMath.bignumber("1");
 export const GENERATOR_MULTIPLIER_PER_LEVEL = gameMath.bignumber("0.1");
 export const GENERATOR_MULTIPLIER_BASE_COST = gameMath.bignumber("10");
 export const GENERATOR_MULTIPLIER_COST_RATE = gameMath.bignumber("1.10");
@@ -30,7 +30,7 @@ export function useGeneratorCalculation() {
   }, [generatorStore.exponentLevel]);
   const generatorMultiplier: BigNumber = useMemo(() => {
     return gameMath.evaluate(
-      `${GENERATOR_MULTIPLAYER_BASE} + ${generatorStore.level} * ${GENERATOR_MULTIPLIER_PER_LEVEL}`
+      `${GENERATOR_MULTIPLIER_BASE} + ${generatorStore.level} * ${GENERATOR_MULTIPLIER_PER_LEVEL}`
     );
   }, [generatorStore.level]);
   const generatorMultiplierCost: BigNumber = useMemo(() => {
