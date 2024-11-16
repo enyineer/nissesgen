@@ -24,9 +24,11 @@ export function useFarmerCalculation() {
     );
   }, [farmerStore.exponentLevel]);
   const farmerExponentCost: BigNumber = useMemo(() => {
-    return gameMath.evaluate(
-      `${FARMER_EXPONENT_BASE_COST} * (${FARMER_EXPONENT_COST_RATE}) ^ ${farmerStore.exponentLevel}`
-    );
+    return (
+      gameMath.evaluate(
+        `${FARMER_EXPONENT_BASE_COST} * (${FARMER_EXPONENT_COST_RATE}) ^ ${farmerStore.exponentLevel}`
+      ) as BigNumber
+    ).ceil();
   }, [farmerStore.exponentLevel]);
   const farmerMultiplier: BigNumber = useMemo(() => {
     return gameMath.evaluate(
@@ -34,9 +36,11 @@ export function useFarmerCalculation() {
     );
   }, [farmerStore.level]);
   const farmerMultiplierCost: BigNumber = useMemo(() => {
-    return gameMath.evaluate(
-      `${FARMER_MULTIPLIER_BASE_COST} * (${FARMER_MULTIPLIER_COST_RATE}) ^ ${farmerStore.level}`
-    );
+    return (
+      gameMath.evaluate(
+        `${FARMER_MULTIPLIER_BASE_COST} * (${FARMER_MULTIPLIER_COST_RATE}) ^ ${farmerStore.level}`
+      ) as BigNumber
+    ).ceil();
   }, [farmerStore.level]);
   const farmerTickFactor: BigNumber = useMemo(() => {
     return gameMath.evaluate(`${farmerMultiplier} ^ ${farmerExponent}`);

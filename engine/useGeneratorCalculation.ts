@@ -22,9 +22,11 @@ export function useGeneratorCalculation() {
     );
   }, [generatorStore.exponentLevel]);
   const generatorExponentCost: BigNumber = useMemo(() => {
-    return gameMath.evaluate(
-      `${GENERATOR_EXPONENT_BASE_COST} * (${GENERATOR_EXPONENT_COST_RATE}) ^ ${generatorStore.exponentLevel}`
-    );
+    return (
+      gameMath.evaluate(
+        `${GENERATOR_EXPONENT_BASE_COST} * (${GENERATOR_EXPONENT_COST_RATE}) ^ ${generatorStore.exponentLevel}`
+      ) as BigNumber
+    ).ceil();
   }, [generatorStore.exponentLevel]);
   const generatorMultiplier: BigNumber = useMemo(() => {
     return gameMath.evaluate(
@@ -32,9 +34,11 @@ export function useGeneratorCalculation() {
     );
   }, [generatorStore.level]);
   const generatorMultiplierCost: BigNumber = useMemo(() => {
-    return gameMath.evaluate(
-      `${GENERATOR_MULTIPLIER_BASE_COST} * (${GENERATOR_MULTIPLIER_COST_RATE}) ^ ${generatorStore.level}`
-    );
+    return (
+      gameMath.evaluate(
+        `${GENERATOR_MULTIPLIER_BASE_COST} * (${GENERATOR_MULTIPLIER_COST_RATE}) ^ ${generatorStore.level}`
+      ) as BigNumber
+    ).ceil();
   }, [generatorStore.level]);
   const generatorTickFactor: BigNumber = useMemo(() => {
     return gameMath.evaluate(`${generatorMultiplier} ^ ${generatorExponent}`);
