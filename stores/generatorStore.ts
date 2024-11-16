@@ -16,18 +16,18 @@ export const useGeneratorStore = create<GeneratorState>()(
   devtools(
     persist(
       (set) => ({
-        level: gameMath.bignumber("1"),
+        level: gameMath.bignumber("0"),
         addLevel: (levelToAdd: BigNumber) =>
           set((state) => ({ level: state.level.plus(levelToAdd) })),
-        exponentLevel: gameMath.bignumber("1"),
+        exponentLevel: gameMath.bignumber("0"),
         addExponentLevel: (levelToAdd: BigNumber) =>
           set((state) => ({
             exponentLevel: state.exponentLevel.plus(levelToAdd),
           })),
         reset: () =>
           set(() => ({
-            level: gameMath.bignumber("1"),
-            exponentLevel: gameMath.bignumber("1"),
+            level: gameMath.bignumber("0"),
+            exponentLevel: gameMath.bignumber("0"),
           })),
       }),
       {
