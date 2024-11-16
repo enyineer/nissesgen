@@ -9,6 +9,7 @@ export default function Home() {
         <LinkButton href="/game">Go to Game</LinkButton>
         <LinkButton
           href="https://github.com/enyineer/nissesgen/"
+          target="_blank"
           className="flex gap-2 items-center"
         >
           <div>GitHub</div>
