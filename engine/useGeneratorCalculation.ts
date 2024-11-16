@@ -6,12 +6,12 @@ import { useMemo } from "react";
 export const GENERATOR_MULTIPLIER_BASE = gameMath.bignumber("1");
 export const GENERATOR_MULTIPLIER_PER_LEVEL = gameMath.bignumber("0.5");
 export const GENERATOR_MULTIPLIER_BASE_COST = gameMath.bignumber("10");
-export const GENERATOR_MULTIPLIER_COST_RATE = gameMath.bignumber("1.10");
+export const GENERATOR_MULTIPLIER_COST_RATE = gameMath.bignumber("1.1");
 
 export const GENERATOR_EXPONENT_BASE = gameMath.bignumber("1");
-export const GENERATOR_EXPONENT_PER_LEVEL = gameMath.bignumber("0.03");
+export const GENERATOR_EXPONENT_PER_LEVEL = gameMath.bignumber("0.02");
 export const GENERATOR_EXPONENT_BASE_COST = gameMath.bignumber("10");
-export const GENERATOR_EXPONENT_COST_RATE = gameMath.bignumber("1.12");
+export const GENERATOR_EXPONENT_COST_RATE = gameMath.bignumber("1.4");
 
 export function useGeneratorCalculation() {
   const generatorStore = useGeneratorStore();
