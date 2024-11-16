@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "austenc.tailwind-docs",
+    "vivaxy.vscode-conventional-commits",
+    "heybourn.headwind"
+  ]
+}
