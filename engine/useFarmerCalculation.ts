@@ -13,7 +13,7 @@ export const FARMER_MULTIPLIER_COST_RATE = gameMath.bignumber("1.14");
 export const FARMER_EXPONENT_BASE = gameMath.bignumber("1");
 export const FARMER_EXPONENT_PER_LEVEL = gameMath.bignumber("0.02");
 export const FARMER_EXPONENT_BASE_COST = gameMath.bignumber("10");
-export const FARMER_EXPONENT_COST_RATE = gameMath.bignumber("1.8");
+export const FARMER_EXPONENT_COST_RATE = gameMath.bignumber("1.4");
 
 export function useFarmerCalculation() {
   const farmerStore = useFarmerStore();
