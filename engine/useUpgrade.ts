@@ -37,24 +37,28 @@ export function useUpgrade(props: UseUpgradeProps) {
     );
   }, [upgradeValues.baseValue, upgradeStore.level, upgradeValues.upgradeValue]);
 
+  // According to https://blog.kongregate.com/the-math-of-idle-games-part-i/
   const calculateCost = useCallback(
-    (amount: BigNumber = gameMath.bignumber("1")) => {
-      if (upgradeValues.costRate.eq(1)) {
-        return upgradeValues.baseCost.times(amount);
+    (amount: BigNumber): BigNumber => {
+      if (amount.eq(0)) {
+        return gameMath.bignumber(0);
       }
-      let totalCost = gameMath.bignumber(0);
-      for (let i = 0; i < amount.toNumber(); i++) {
-        totalCost = totalCost.plus(
-          gameMath.evaluate(
-            `${upgradeValues.baseCost} * (${
-              upgradeValues.costRate
-            } ^ ${upgradeStore.level.plus(i)})`
-          )
-        );
+
+      if (props.upgradeValues.costRate.eq(1)) {
+        return gameMath.evaluate(`${props.upgradeValues.baseCost} * ${amount}`);
       }
-      return totalCost as BigNumber;
+
+      const result = gameMath.evaluate(
+        `${props.upgradeValues.baseCost} * ((${props.upgradeValues.costRate} ^ ${upgradeStore.level} * (${props.upgradeValues.costRate} ^ ${amount} - 1)) / (${props.upgradeValues.costRate} - 1))`
+      );
+
+      return result as BigNumber;
     },
-    [upgradeValues.baseCost, upgradeValues.costRate, upgradeStore.level]
+    [
+      props.upgradeValues.baseCost,
+      props.upgradeValues.costRate,
+      upgradeStore.level,
+    ]
   );
 
   const costForOne: BigNumber = useMemo(() => {
@@ -69,29 +73,21 @@ export function useUpgrade(props: UseUpgradeProps) {
     return calculateCost(gameMath.bignumber("25"));
   }, [calculateCost]);
 
-  const maxBuyable: BigNumber = useMemo(() => {
-    if (upgradeValues.costRate.eq(1)) {
-      return scoreStore.score.div(upgradeValues.baseCost).floor();
-    }
-    let max = gameMath.bignumber(0);
-    let currentCost = gameMath.bignumber(0);
-    for (let i = 0; ; i++) {
-      currentCost = gameMath.evaluate(
-        `${upgradeValues.baseCost} * (${
-          upgradeValues.costRate
-        } ^ ${upgradeStore.level.plus(i)})`
-      );
-      if (scoreStore.score.gte(currentCost)) {
-        max = gameMath.bignumber(i + 1);
-      } else {
-        break;
-      }
-    }
-    return max;
+  // According to https://blog.kongregate.com/the-math-of-idle-games-part-i/
+  const maxBuyable = useMemo(() => {
+    const logInner = gameMath.evaluate(
+      `((${scoreStore.score} * (${props.upgradeValues.costRate} - 1)) / (${props.upgradeValues.baseCost} * (${props.upgradeValues.costRate} ^ ${upgradeStore.level}))) + 1`
+    );
+
+    const loggedByCostRate = (
+      logInner.log(props.upgradeValues.costRate) as BigNumber
+    ).floor();
+
+    return loggedByCostRate;
   }, [
+    props.upgradeValues.baseCost,
+    props.upgradeValues.costRate,
     scoreStore.score,
-    upgradeValues.baseCost,
-    upgradeValues.costRate,
     upgradeStore.level,
   ]);
 
