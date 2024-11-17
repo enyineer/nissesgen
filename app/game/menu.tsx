@@ -1,8 +1,8 @@
 import MenuItem from "./menuItem";
 import {
   GiAchievement,
+  GiAlarmClock,
   GiChecklist,
-  GiPointing,
   GiSettingsKnobs,
   GiUpgrade,
 } from "react-icons/gi";
@@ -10,7 +10,7 @@ import {
 export default function Menu() {
   return (
     <div className="flex flex-col gap-4 px-4 py-3 h-full bg-gray-800">
-      <MenuItem href="/game" label="Generator" icon={<GiPointing />} />
+      <MenuItem href="/game" label="Clock" icon={<GiAlarmClock />} />
       <MenuItem href="/game/upgrades" label="Upgrades" icon={<GiUpgrade />} />
       <MenuItem
         href="/game/achievements"

@@ -1,3 +1,5 @@
+"use client";
+
 import { toast, ToastOptions } from "react-toastify";
 
 import bossYelling from "../images/boss_yelling.jpg";

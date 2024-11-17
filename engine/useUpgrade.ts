@@ -1,3 +1,5 @@
+"use client";
+
 import { BigNumber } from "mathjs";
 import { createUpgradeStore } from "../stores/upgradeStore";
 import { useCallback, useMemo } from "react";
