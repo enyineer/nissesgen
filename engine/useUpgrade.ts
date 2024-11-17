@@ -23,6 +23,7 @@ type UseUpgradeProps = {
   };
   // Takes any CurrencyStore for upgrades to buy with
   currencyStore: CurrencyStore;
+  onBuy?: (amount: BigNumber) => void;
 };
 
 export type Upgrade = ReturnType<typeof useUpgrade>;
@@ -105,9 +106,12 @@ export function useUpgrade(props: UseUpgradeProps) {
       if (currencyStore.amount.gte(cost)) {
         currencyStore.subtract(cost);
         upgradeStore.addLevel(amount);
+        if (props.onBuy) {
+          props.onBuy(amount);
+        }
       }
     },
-    [calculateCost, currencyStore, upgradeStore]
+    [calculateCost, currencyStore, props, upgradeStore]
   );
 
   const unlock = useCallback(() => {
