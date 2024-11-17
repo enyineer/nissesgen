@@ -11,6 +11,7 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
   const {
     unlocked,
     unlockable,
+    unlock,
     unlockCost,
     maxBuyable,
     buy,
@@ -22,9 +23,16 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
   const label = props.label;
 
   if (!unlocked) {
-    <Button className="flex flex-col" fullWidth disabled={!unlockable}>
-      Unlock ${label} for ${gameMath.format(unlockCost)} Nisses
-    </Button>;
+    return (
+      <Button
+        className="flex flex-col"
+        fullWidth
+        disabled={!unlockable}
+        onClick={() => unlock()}
+      >
+        Unlock {label} for {gameMath.format(unlockCost)} Nisses
+      </Button>
+    );
   }
 
   return (
