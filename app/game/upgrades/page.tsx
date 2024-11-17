@@ -14,8 +14,8 @@ export default function UpgradesPage() {
     <div className="flex flex-col gap-2">
       <h1 className="text-2xl">Upgrades</h1>
       <h2 className="text-xl">
-        Time ({gameMath.format(time.tickValue)}ms /{" "}
-        {gameMath.format(MILLISECONDS_PER_TICK)}ms)
+        Time on Shift ({gameMath.format(time.tickValue)} {time.displayName} /{" "}
+        {gameMath.format(MILLISECONDS_PER_TICK)} ms)
       </h2>
       <div className="flex justify-between gap-4 xl:flex-row flex-col">
         <div className="flex-grow">
@@ -24,7 +24,7 @@ export default function UpgradesPage() {
       </div>
       <h2 className="text-xl">
         Wage ({money.tickValue.toFixed(4)} N$ /{" "}
-        {gameMath.format(MILLISECONDS_PER_TICK)}ms)
+        {gameMath.format(MILLISECONDS_PER_TICK)} ms)
       </h2>
       <div className="flex justify-between gap-4 xl:flex-row flex-col">
         <div className="flex-grow">

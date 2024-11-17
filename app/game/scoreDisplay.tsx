@@ -6,7 +6,7 @@ import useMoney from "../../engine/useMoney";
 import { gameMath } from "../../gameMath";
 
 export default function ScoreDisplay() {
-  const { time } = useTime();
+  const { time, displayName: timeDisplayName } = useTime();
   const { money, displayName: moneyDisplayName } = useMoney();
 
   return (
@@ -18,7 +18,8 @@ export default function ScoreDisplay() {
         Time on Shift:{" "}
         {Duration.fromMillis(time.toNumber()).toFormat(
           "dd'd' hh'h' mm'm' ss's'"
-        )}
+        )}{" "}
+        ({gameMath.format(time, 2)} {timeDisplayName})
       </div>
     </div>
   );

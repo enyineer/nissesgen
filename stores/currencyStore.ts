@@ -39,7 +39,11 @@ export const createCurrencyStore = (props: {
           subtract: (amount: BigNumber) =>
             set((state) => ({ amount: state.amount.minus(amount) })),
           displayName: props.displayName,
-          reset: () => set(() => ({ amount: gameMath.bignumber("0") })),
+          reset: () =>
+            set(() => ({
+              amount: gameMath.bignumber("0"),
+              displayName: props.displayName,
+            })),
         }),
         {
           name: `${props.name}-currency-state`,

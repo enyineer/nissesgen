@@ -17,7 +17,7 @@ export const TIME_MULTIPLIER_UNLOCK_COST = gameMath.bignumber(1000 * 60 * 30);
 export default function useTime() {
   const timeStore = createCurrencyStore({
     name: "time",
-    displayName: "Milliseconds",
+    displayName: "ms",
   })();
 
   const timeMultiplierUpgrade = useUpgrade({
@@ -57,5 +57,6 @@ export default function useTime() {
     reset: timeStore.reset,
     timeMultiplierUpgrade,
     upgradeFactor,
+    displayName: timeStore.displayName,
   };
 }
