@@ -2,15 +2,15 @@ import { useMemo } from "react";
 import { gameMath } from "../gameMath";
 import { useUpgrade } from "./useUpgrade";
 
-export const MULTIPLIER_MULTIPLIER_BASE = gameMath.bignumber("1");
-export const MULTIPLIER_MULTIPLIER_PER_LEVEL = gameMath.bignumber("0.2");
-export const MULTIPLIER_MULTIPLIER_BASE_COST = gameMath.bignumber("10");
-export const MULTIPLIER_MULTIPLIER_COST_RATE = gameMath.bignumber("1.14");
+export const GENERATOR_MULTIPLIER_BASE = gameMath.bignumber("1");
+export const GENERATOR_MULTIPLIER_PER_LEVEL = gameMath.bignumber("0.2");
+export const GENERATOR_MULTIPLIER_BASE_COST = gameMath.bignumber("10");
+export const GENERATOR_MULTIPLIER_COST_RATE = gameMath.bignumber("1.14");
 
-export const MULTIPLIER_EXPONENT_BASE = gameMath.bignumber("1");
-export const MULTIPLIER_EXPONENT_PER_LEVEL = gameMath.bignumber("0.02");
-export const MULTIPLIER_EXPONENT_BASE_COST = gameMath.bignumber("10");
-export const MULTIPLIER_EXPONENT_COST_RATE = gameMath.bignumber("1.4");
+export const GENERATOR_EXPONENT_BASE = gameMath.bignumber("1");
+export const GENERATOR_EXPONENT_PER_LEVEL = gameMath.bignumber("0.02");
+export const GENERATOR_EXPONENT_BASE_COST = gameMath.bignumber("10");
+export const GENERATOR_EXPONENT_COST_RATE = gameMath.bignumber("1.4");
 
 export function useGeneratorUpgrade() {
   const generatorMultiplierUpgrade = useUpgrade({
@@ -22,10 +22,10 @@ export function useGeneratorUpgrade() {
     },
     upgradeValues: {
       unlockCost: gameMath.bignumber(0),
-      baseCost: MULTIPLIER_MULTIPLIER_BASE_COST,
-      costRate: MULTIPLIER_MULTIPLIER_COST_RATE,
-      baseValue: MULTIPLIER_MULTIPLIER_BASE,
-      upgradeValue: MULTIPLIER_MULTIPLIER_PER_LEVEL,
+      baseCost: GENERATOR_MULTIPLIER_BASE_COST,
+      costRate: GENERATOR_MULTIPLIER_COST_RATE,
+      baseValue: GENERATOR_MULTIPLIER_BASE,
+      upgradeValue: GENERATOR_MULTIPLIER_PER_LEVEL,
     },
   });
 
@@ -38,10 +38,10 @@ export function useGeneratorUpgrade() {
     },
     upgradeValues: {
       unlockCost: gameMath.bignumber(0),
-      baseCost: MULTIPLIER_EXPONENT_BASE_COST,
-      costRate: MULTIPLIER_EXPONENT_COST_RATE,
-      baseValue: MULTIPLIER_EXPONENT_BASE,
-      upgradeValue: MULTIPLIER_EXPONENT_PER_LEVEL,
+      baseCost: GENERATOR_EXPONENT_BASE_COST,
+      costRate: GENERATOR_EXPONENT_COST_RATE,
+      baseValue: GENERATOR_EXPONENT_BASE,
+      upgradeValue: GENERATOR_EXPONENT_PER_LEVEL,
     },
   });
 

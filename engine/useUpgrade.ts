@@ -118,7 +118,7 @@ export function useUpgrade(props: UseUpgradeProps) {
       scoreStore.removeScore(upgradeValues.unlockCost);
       upgradeStore.unlock();
     }
-  }, [scoreStore, upgradeStore]);
+  }, [scoreStore, upgradeStore, upgradeValues.unlockCost]);
 
   const unlockable = useMemo(() => {
     return scoreStore.score.gte(upgradeValues.unlockCost);
