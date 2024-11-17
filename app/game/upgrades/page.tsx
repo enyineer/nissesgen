@@ -11,28 +11,39 @@ export default function UpgradesPage() {
   const money = useMoney();
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4">
       <h1 className="text-2xl">Upgrades</h1>
-      <h2 className="text-xl">
-        Time on Shift ({gameMath.format(time.tickValue)} {time.displayName} /{" "}
-        {gameMath.format(MILLISECONDS_PER_TICK)} ms)
-      </h2>
-      <div className="flex justify-between gap-4 xl:flex-row flex-col">
-        <div className="flex-grow">
-          <UpgradeButton upgrade={time.timeMultiplierUpgrade} />
+      <div className="flex flex-col">
+        <h3 className="text-lg">
+          Time on Shift ({gameMath.format(time.tickValue)} {time.displayName} /{" "}
+          {gameMath.format(MILLISECONDS_PER_TICK)} ms)
+        </h3>
+        <h4 className="text-md font-bold">Make time go by faster</h4>
+        <div className="flex justify-between gap-4 xl:flex-row flex-col">
+          <div className="flex-grow">
+            <UpgradeButton upgrade={time.timeMultiplierUpgrade} />
+          </div>
         </div>
       </div>
-      <h2 className="text-xl">
-        Wage ({money.tickValue.toFixed(4)} N$ /{" "}
-        {gameMath.format(MILLISECONDS_PER_TICK)} ms)
-      </h2>
-      <div className="flex justify-between gap-4 xl:flex-row flex-col">
-        <div className="flex-grow">
-          <UpgradeButton upgrade={money.chocolateUpgrade} />
+      <div className="flex flex-col">
+        <h3 className="text-lg">
+          Wage ({money.tickValue.toFixed(4)} N$ /{" "}
+          {gameMath.format(MILLISECONDS_PER_TICK)} ms)
+        </h3>
+        <h4 className="text-md font-bold">
+          Bribe your boss and improve your wage
+        </h4>
+        <div className="flex justify-between gap-4 xl:flex-row flex-col">
+          <div className="flex-grow">
+            <UpgradeButton upgrade={money.chocolateUpgrade} />
+          </div>
+          <div className="flex-grow">
+            <UpgradeButton upgrade={money.cigarUpgrade} />
+          </div>
         </div>
-        <div className="flex-grow">
-          <UpgradeButton upgrade={money.cigarUpgrade} />
-        </div>
+      </div>
+      <div className="text-center">
+        More Upgrades coming soon! (eg. buy houses / prestige etc.)
       </div>
     </div>
   );
