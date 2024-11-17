@@ -18,7 +18,20 @@ export default function GamePage() {
     statsStore.incrementClicks(gameMath.bignumber("1"));
   }, [tickFactor, scoreStore, statsStore]);
 
-  useKeyPressEvent(" ", handleClick, undefined);
+  useKeyPressEvent(
+    " ",
+    (e) => {
+      if (e !== null) {
+        e.preventDefault();
+        handleClick();
+      }
+    },
+    (e) => {
+      if (e !== null) {
+        e.preventDefault();
+      }
+    }
+  );
 
   return (
     <div className="flex flex-col h-full">
