@@ -5,6 +5,7 @@ import { gameMath } from "../gameMath";
 import { createCurrencyStore } from "../stores/currencyStore";
 import { useUpgrade } from "./useUpgrade";
 import { BigNumber } from "mathjs";
+import { MILLISECONDS_PER_TICK } from "./useGameEngine";
 
 export const MULTIPLIER_BASE = gameMath.bignumber("1");
 
@@ -60,24 +61,30 @@ export default function useMoney() {
     displayName: "Cigar for Boss",
   });
 
-  const upgradeFactor = useMemo(() => {
-    return gameMath.evaluate(`${chocolateUpgrade.value}`);
-  }, [chocolateUpgrade.value]);
+  const upgradeFactor = useMemo<BigNumber>(() => {
+    return gameMath.evaluate(
+      `${chocolateUpgrade.value} + ${cigarUpgrade.value} + 1`
+    );
+  }, [chocolateUpgrade.value, cigarUpgrade.value]);
 
-  const tick = useCallback(
-    (msPerTick: BigNumber) => {
-      // hourFraction is the fraction of an hour that has passed since last tick
-      const hourFraction = gameMath.evaluate(`${msPerTick} * 60 * 60`);
-      moneyStore.add(
-        gameMath.evaluate(`(${BASE_WAGE} * ${upgradeFactor}) / ${hourFraction}`)
-      );
-    },
-    [upgradeFactor]
-  );
+  const tickValue = useMemo<BigNumber>(() => {
+    // hourFraction is the fraction of an hour that has passed since last tick
+    const hourFraction = gameMath.evaluate(
+      `${MILLISECONDS_PER_TICK} * 60 * 60`
+    );
+    return gameMath.evaluate(
+      `(${MILLISECONDS_PER_TICK} * ${upgradeFactor}) / ${hourFraction}`
+    );
+  }, [upgradeFactor]);
+
+  const tick = useCallback(() => {
+    moneyStore.add(tickValue);
+  }, [upgradeFactor]);
 
   return {
     money: moneyStore.amount,
     tick,
+    tickValue,
     reset: moneyStore.reset,
     chocolateUpgrade,
     cigarUpgrade,

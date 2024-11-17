@@ -1,12 +1,14 @@
 "use client";
 
 import Button from "../../../components/buttons/button";
+import useMoney from "../../../engine/useMoney";
 import useNotification from "../../../engine/useNotification";
 import useTime from "../../../engine/useTime";
 import { useStatsStore } from "../../../stores/statsStore";
 
 export default function SettingsPage() {
   const time = useTime();
+  const money = useMoney();
   const statsStore = useStatsStore();
   const { bossMessage } = useNotification();
 
@@ -17,6 +19,7 @@ export default function SettingsPage() {
         variant="warning"
         onClick={() => {
           time.reset();
+          money.reset();
           statsStore.reset();
           bossMessage({
             message: "You are fired!",

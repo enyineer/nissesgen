@@ -5,6 +5,7 @@ import { gameMath } from "../gameMath";
 import { createCurrencyStore } from "../stores/currencyStore";
 import { useUpgrade } from "./useUpgrade";
 import { BigNumber } from "mathjs";
+import { MILLISECONDS_PER_TICK } from "./useGameEngine";
 
 export const TIME_MULTIPLIER_BASE = gameMath.bignumber("1");
 export const TIME_MULTIPLIER_PER_LEVEL = gameMath.bignumber("0.01");
@@ -37,22 +38,22 @@ export default function useTime() {
     displayName: "Time Multiplier",
   });
 
-  const upgradeFactor = useMemo(() => {
+  const upgradeFactor = useMemo<BigNumber>(() => {
     return gameMath.evaluate(`${timeMultiplierUpgrade.value}`);
   }, [timeMultiplierUpgrade.value]);
 
-  const tick = useCallback(
-    (ms: BigNumber) => {
-      timeStore.add(
-        gameMath.evaluate(`${ms} * ${timeMultiplierUpgrade.value}`)
-      );
-    },
-    [upgradeFactor]
-  );
+  const tickValue = useMemo<BigNumber>(() => {
+    return gameMath.evaluate(`${MILLISECONDS_PER_TICK} * ${upgradeFactor}`);
+  }, [upgradeFactor]);
+
+  const tick = useCallback(() => {
+    timeStore.add(tickValue);
+  }, [tickValue]);
 
   return {
     time: timeStore.amount,
     tick,
+    tickValue,
     reset: timeStore.reset,
     timeMultiplierUpgrade,
     upgradeFactor,

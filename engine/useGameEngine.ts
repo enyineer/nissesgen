@@ -5,7 +5,7 @@ import { gameMath } from "../gameMath";
 import useTime from "./useTime";
 import useMoney from "./useMoney";
 
-const millisecondsPerTick = gameMath.bignumber(100);
+export const MILLISECONDS_PER_TICK = gameMath.bignumber(100);
 
 export default function useGameEngine() {
   const statsStore = useStatsStore();
@@ -23,8 +23,8 @@ export default function useGameEngine() {
   // Score Update
   useInterval(() => {
     if (gameEngineStore.clockedIn) {
-      tickTime(millisecondsPerTick);
-      tickMoney(millisecondsPerTick);
+      tickTime();
+      tickMoney();
     }
-  }, millisecondsPerTick.toNumber());
+  }, MILLISECONDS_PER_TICK.toNumber());
 }

@@ -146,5 +146,6 @@ export function useUpgrade(props: UseUpgradeProps) {
       amount: currencyStore.amount,
     },
     displayName: props.displayName,
+    upgradeValues: props.upgradeValues,
   };
 }
