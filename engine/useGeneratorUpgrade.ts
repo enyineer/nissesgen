@@ -3,9 +3,9 @@ import { gameMath } from "../gameMath";
 import { useUpgrade } from "./useUpgrade";
 
 export const GENERATOR_MULTIPLIER_BASE = gameMath.bignumber("1");
-export const GENERATOR_MULTIPLIER_PER_LEVEL = gameMath.bignumber("0.2");
+export const GENERATOR_MULTIPLIER_PER_LEVEL = gameMath.bignumber("0.25");
 export const GENERATOR_MULTIPLIER_BASE_COST = gameMath.bignumber("10");
-export const GENERATOR_MULTIPLIER_COST_RATE = gameMath.bignumber("1.14");
+export const GENERATOR_MULTIPLIER_COST_RATE = gameMath.bignumber("1.07");
 
 export const GENERATOR_EXPONENT_BASE = gameMath.bignumber("1");
 export const GENERATOR_EXPONENT_PER_LEVEL = gameMath.bignumber("0.02");
