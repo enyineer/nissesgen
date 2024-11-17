@@ -28,6 +28,9 @@ export default function UpgradesPage() {
         </div>
       </div>
       <h2 className="text-xl">Farmer</h2>
+      <h3 className="text-lg">
+        You need to unlock both upgrades for Farmer to work!
+      </h3>
       <div className="flex justify-between gap-4">
         <div className="flex-grow">
           <UpgradeButton
