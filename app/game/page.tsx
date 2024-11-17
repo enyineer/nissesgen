@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useInterval } from "react-use";
 import { DateTime } from "luxon";
 import Button from "../../components/buttons/button";
@@ -30,14 +30,22 @@ export default function GamePage() {
     []
   );
 
-  const [timeString, setTimeString] = useState(getTimeString());
-  const [dateString, setDateString] = useState(getDateString());
+  const [timeString, setTimeString] = useState("");
+  const [dateString, setDateString] = useState("");
 
   const { bossMessage } = useNotification();
 
-  useInterval(() => {
+  const updateTimes = useCallback(() => {
     setTimeString(getTimeString());
     setDateString(getDateString());
+  }, [setTimeString, getTimeString, setDateString, getDateString]);
+
+  useMemo(() => {
+    updateTimes();
+  }, []);
+
+  useInterval(() => {
+    updateTimes();
   }, 1000);
 
   const handleClick = useCallback(() => {
