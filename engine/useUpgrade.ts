@@ -24,6 +24,7 @@ type UseUpgradeProps = {
   // Takes any CurrencyStore for upgrades to buy with
   currencyStore: CurrencyStore;
   onBuy?: (amount: BigNumber) => void;
+  onUnlock?: () => void;
 };
 
 export type Upgrade = ReturnType<typeof useUpgrade>;
@@ -121,8 +122,11 @@ export function useUpgrade(props: UseUpgradeProps) {
     ) {
       currencyStore.subtract(upgradeValues.unlockCost);
       upgradeStore.unlock();
+      if (props.onUnlock) {
+        props.onUnlock();
+      }
     }
-  }, [currencyStore, upgradeStore, upgradeValues.unlockCost]);
+  }, [currencyStore, props, upgradeStore, upgradeValues.unlockCost]);
 
   const unlockable = useMemo(() => {
     return currencyStore.amount.gte(upgradeValues.unlockCost);
