@@ -3,20 +3,20 @@
 import Button from "../../components/buttons/button";
 import { useScoreStore } from "../../stores/scoreStore";
 import { gameMath } from "../../gameMath";
-import { useGeneratorCalculation } from "../../engine/useGeneratorCalculation";
 import { useCallback } from "react";
 import { useStatsStore } from "../../stores/statsStore";
 import { useKeyPressEvent } from "react-use";
+import { useGeneratorUpgrade } from "../../engine/useGeneratorUpgrade";
 
 export default function GamePage() {
   const scoreStore = useScoreStore();
   const statsStore = useStatsStore();
-  const { generatorTickFactor } = useGeneratorCalculation();
+  const { tickFactor } = useGeneratorUpgrade();
 
   const handleClick = useCallback(() => {
-    scoreStore.addScore(generatorTickFactor);
+    scoreStore.addScore(tickFactor);
     statsStore.incrementClicks(gameMath.bignumber("1"));
-  }, [generatorTickFactor, scoreStore, statsStore]);
+  }, [tickFactor, scoreStore, statsStore]);
 
   useKeyPressEvent(" ", handleClick, undefined);
 
@@ -31,7 +31,7 @@ export default function GamePage() {
         >
           <div className="flex flex-col">
             <div className="font-bold">
-              Generate {gameMath.format(generatorTickFactor, 4)} Nisses
+              Generate {gameMath.format(tickFactor, 4)} Nisses
             </div>
             <div className="text-sm">
               Click or press SPACE to generate Nisses

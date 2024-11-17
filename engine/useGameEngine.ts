@@ -5,16 +5,15 @@ import { useGameEngineStore } from "../stores/gameEngineStore";
 import { gameMath } from "../gameMath";
 import { BigNumber } from "mathjs";
 import { useCallback } from "react";
-import { useFarmerCalculation } from "./useFarmerCalculation";
-import { useFarmerStore } from "../stores/farmerStore";
+import { useFarmerUpgrade } from "./useFarmerUpgrade";
 
 const millisecondsPerTick = gameMath.bignumber(100);
 
 export default function useGameEngine() {
   const statsStore = useStatsStore();
   const scoreStore = useScoreStore();
-  const { farmerTickFactor } = useFarmerCalculation();
-  const { unlocked: farmerUnlocked } = useFarmerStore();
+  const { tickFactor, farmerExponentUpgrade, farmerMultiplierUpgrade } =
+    useFarmerUpgrade();
   const gameEngineStore = useGameEngineStore();
 
   // Stats time update Intervall
@@ -24,13 +23,16 @@ export default function useGameEngine() {
 
   const tickFarmer = useCallback(
     (ticks: BigNumber) => {
-      if (farmerUnlocked) {
-        scoreStore.addScore(
-          gameMath.evaluate(`${farmerTickFactor} * ${ticks}`)
-        );
+      if (farmerExponentUpgrade.unlocked && farmerMultiplierUpgrade.unlocked) {
+        scoreStore.addScore(gameMath.evaluate(`${tickFactor} * ${ticks}`));
       }
     },
-    [farmerUnlocked, farmerTickFactor, scoreStore]
+    [
+      farmerExponentUpgrade.unlocked,
+      farmerMultiplierUpgrade.unlocked,
+      scoreStore,
+      tickFactor,
+    ]
   );
 
   // Game Tick Intervall

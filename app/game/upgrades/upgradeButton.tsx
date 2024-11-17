@@ -1,49 +1,49 @@
-import { BigNumber } from "mathjs";
 import Button from "../../../components/buttons/button";
-import { useScoreStore } from "../../../stores/scoreStore";
-import { useCallback, useMemo } from "react";
 import { gameMath } from "../../../gameMath";
+import { Upgrade } from "../../../engine/useUpgrade";
 
 type UpgradeButtonProps = {
-  name: string;
-  level: BigNumber;
-  multiplier: BigNumber;
-  multiplierSign: "x" | "^";
-  cost: BigNumber;
-  onSuccess: () => void;
+  label: string;
+  upgrade: Upgrade;
 };
 
 export default function UpgradeButton(props: UpgradeButtonProps) {
-  const scoreStore = useScoreStore();
+  const {
+    unlocked,
+    unlockable,
+    unlockCost,
+    maxBuyable,
+    buy,
+    level,
+    value,
+    prefix,
+    cost,
+  } = props.upgrade;
+  const label = props.label;
 
-  const disabled = useMemo(() => {
-    return scoreStore.score.lt(props.cost);
-  }, [scoreStore.score, props.cost]);
-
-  const handleUpgrade = useCallback(() => {
-    if (!disabled) {
-      scoreStore.removeScore(props.cost);
-      props.onSuccess();
-    }
-  }, [disabled, props, scoreStore]);
+  if (!unlocked) {
+    <Button className="flex flex-col" fullWidth disabled={!unlockable}>
+      Unlock ${label} for ${gameMath.format(unlockCost)} Nisses
+    </Button>;
+  }
 
   return (
     <Button
       className="flex flex-col"
       fullWidth
-      disabled={disabled}
-      onClick={handleUpgrade}
+      disabled={maxBuyable.eq(0)}
+      onClick={() => buy()}
     >
       <div className="flex items-center justify-between">
-        <h3 className="text-lg">{props.name}</h3>
-        <div>Level: {props.level.toString()}</div>
+        <h3 className="text-lg">{props.label}</h3>
+        <div>Level: {level.toString()}</div>
       </div>
       <div className="flex items-center justify-between">
         <div>
-          Value: {props.multiplierSign}
-          {props.multiplier.toString()}
+          Value: {prefix}
+          {gameMath.format(value)}
         </div>
-        <div>Cost: {gameMath.format(props.cost)} Nisses</div>
+        <div>Cost: {gameMath.format(cost.one)} Nisses</div>
       </div>
     </Button>
   );

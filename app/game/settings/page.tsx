@@ -1,14 +1,15 @@
 "use client";
 
 import Button from "../../../components/buttons/button";
-import { useFarmerStore } from "../../../stores/farmerStore";
-import { useGeneratorStore } from "../../../stores/generatorStore";
+import { useFarmerUpgrade } from "../../../engine/useFarmerUpgrade";
+import { useGeneratorUpgrade } from "../../../engine/useGeneratorUpgrade";
 import { useScoreStore } from "../../../stores/scoreStore";
 import { useStatsStore } from "../../../stores/statsStore";
 
 export default function SettingsPage() {
-  const farmerStore = useFarmerStore();
-  const generatorStore = useGeneratorStore();
+  const { generatorExponentUpgrade, generatorMultiplierUpgrade } =
+    useGeneratorUpgrade();
+  const { farmerExponentUpgrade, farmerMultiplierUpgrade } = useFarmerUpgrade();
   const scoreStore = useScoreStore();
   const statsStore = useStatsStore();
 
@@ -18,8 +19,10 @@ export default function SettingsPage() {
       <Button
         variant="warning"
         onClick={() => {
-          farmerStore.reset();
-          generatorStore.reset();
+          generatorExponentUpgrade.reset();
+          generatorMultiplierUpgrade.reset();
+          farmerExponentUpgrade.reset();
+          farmerMultiplierUpgrade.reset();
           scoreStore.reset();
           statsStore.reset();
         }}
