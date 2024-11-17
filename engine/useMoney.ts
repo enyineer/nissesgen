@@ -70,7 +70,7 @@ export default function useMoney() {
     displayName: "Cigar for Boss",
     onBuy: () => {
       bossMessage({
-        message: "How does not like one of these?!",
+        message: "Only idiots would not smoke this! Ha!",
       });
     },
   });

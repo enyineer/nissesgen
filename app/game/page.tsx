@@ -53,7 +53,7 @@ export default function GamePage() {
       bossMessage({ message: "Welcome to work, wageslave!" });
       gameEngineStore.setClockIn(true);
     } else {
-      bossMessage({ message: "Come back soon!" });
+      bossMessage({ message: "Come back soon! We have got work to do..." });
       gameEngineStore.setClockIn(false);
     }
   }, [bossMessage, gameEngineStore]);
