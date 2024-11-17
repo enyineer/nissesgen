@@ -55,7 +55,7 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
           disabled={maxBuyable.lt(1)}
           onClick={() => buy(gameMath.bignumber(1))}
         >
-          <div>x1</div>
+          <div>Buy x1</div>
           <div>{cost.one.toFixed(2)} N</div>
         </Button>
         <Button
@@ -64,7 +64,7 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
           disabled={maxBuyable.lt(5)}
           onClick={() => buy(gameMath.bignumber(5))}
         >
-          <div>x5</div>
+          <div>Buy x5</div>
           <div>{cost.five.toFixed(2)} N</div>
         </Button>
         <Button
@@ -73,7 +73,7 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
           disabled={maxBuyable.lt(25)}
           onClick={() => buy(gameMath.bignumber(25))}
         >
-          <div>x25</div>
+          <div>Buy x25</div>
           <div>{cost.twentyFive.toFixed(2)} N</div>
         </Button>
         <Button
@@ -82,7 +82,7 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
           disabled={maxBuyable.lt(1)}
           onClick={() => buy(maxBuyable)}
         >
-          <div>Max (x{gameMath.format(maxBuyable)})</div>
+          <div>Buy Max (x{gameMath.format(maxBuyable)})</div>
           <div>{cost.maxBuyable.toFixed(2)} N</div>
         </Button>
       </div>
