@@ -49,9 +49,9 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
       <div className="flex items-center justify-between">
         <div>
           Value: {prefix}
-          {gameMath.format(value)}
+          {value.toFixed(2)}
         </div>
-        <div>Cost: {gameMath.format(cost.one)} Nisses</div>
+        <div>Cost: {cost.one.toFixed(2)} Nisses</div>
       </div>
     </Button>
   );

@@ -31,7 +31,7 @@ export function useUpgrade(props: UseUpgradeProps) {
     name,
   })();
 
-  const value = useMemo(() => {
+  const value: BigNumber = useMemo(() => {
     return gameMath.evaluate(
       `${upgradeValues.baseValue} + ${upgradeStore.level} * ${upgradeValues.upgradeValue}`
     );
@@ -52,24 +52,24 @@ export function useUpgrade(props: UseUpgradeProps) {
           )
         );
       }
-      return totalCost;
+      return totalCost as BigNumber;
     },
     [upgradeValues.baseCost, upgradeValues.costRate, upgradeStore.level]
   );
 
-  const costForOne = useMemo(() => {
+  const costForOne: BigNumber = useMemo(() => {
     return calculateCost(gameMath.bignumber("1"));
   }, [calculateCost]);
 
-  const costForFive = useMemo(() => {
+  const costForFive: BigNumber = useMemo(() => {
     return calculateCost(gameMath.bignumber("5"));
   }, [calculateCost]);
 
-  const costForTwentyFive = useMemo(() => {
+  const costForTwentyFive: BigNumber = useMemo(() => {
     return calculateCost(gameMath.bignumber("25"));
   }, [calculateCost]);
 
-  const maxBuyable = useMemo(() => {
+  const maxBuyable: BigNumber = useMemo(() => {
     if (upgradeValues.costRate.eq(1)) {
       return scoreStore.score.div(upgradeValues.baseCost).floor();
     }
@@ -95,7 +95,7 @@ export function useUpgrade(props: UseUpgradeProps) {
     upgradeStore.level,
   ]);
 
-  const costForMaxBuyable = useMemo(() => {
+  const costForMaxBuyable: BigNumber = useMemo(() => {
     return calculateCost(maxBuyable);
   }, [calculateCost, maxBuyable]);
 
