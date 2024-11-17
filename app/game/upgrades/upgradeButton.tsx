@@ -46,7 +46,6 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
           Value: {prefix}
           {value.toFixed(2)}
         </div>
-        <div>Cost: {cost.one.toFixed(2)} Nisses</div>
       </div>
       <div className="flex gap-2">
         <Button
@@ -56,7 +55,7 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
           onClick={() => buy(gameMath.bignumber(1))}
         >
           <div>Buy x1</div>
-          <div>{cost.one.toFixed(2)} N</div>
+          <div>{gameMath.format(cost.one, { precision: 4 })} N</div>
         </Button>
         <Button
           className="flex flex-col"
@@ -65,7 +64,7 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
           onClick={() => buy(gameMath.bignumber(5))}
         >
           <div>Buy x5</div>
-          <div>{cost.five.toFixed(2)} N</div>
+          <div>{gameMath.format(cost.five, { precision: 4 })} N</div>
         </Button>
         <Button
           className="flex flex-col"
@@ -74,7 +73,7 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
           onClick={() => buy(gameMath.bignumber(25))}
         >
           <div>Buy x25</div>
-          <div>{cost.twentyFive.toFixed(2)} N</div>
+          <div>{gameMath.format(cost.twentyFive, { precision: 4 })} N</div>
         </Button>
         <Button
           className="flex flex-col"
@@ -83,7 +82,7 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
           onClick={() => buy(maxBuyable)}
         >
           <div>Buy Max (x{gameMath.format(maxBuyable)})</div>
-          <div>{cost.maxBuyable.toFixed(2)} N</div>
+          <div>{gameMath.format(cost.maxBuyable, { precision: 4 })} N</div>
         </Button>
       </div>
     </div>
