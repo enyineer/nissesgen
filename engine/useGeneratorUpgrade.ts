@@ -10,7 +10,7 @@ export const GENERATOR_MULTIPLIER_COST_RATE = gameMath.bignumber("1.07");
 export const GENERATOR_EXPONENT_BASE = gameMath.bignumber("1");
 export const GENERATOR_EXPONENT_PER_LEVEL = gameMath.bignumber("0.02");
 export const GENERATOR_EXPONENT_BASE_COST = gameMath.bignumber("10");
-export const GENERATOR_EXPONENT_COST_RATE = gameMath.bignumber("1.4");
+export const GENERATOR_EXPONENT_COST_RATE = gameMath.bignumber("1.25");
 
 export function useGeneratorUpgrade() {
   const generatorMultiplierUpgrade = useUpgrade({
