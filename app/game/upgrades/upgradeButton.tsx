@@ -36,12 +36,7 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
   }
 
   return (
-    <Button
-      className="flex flex-col"
-      fullWidth
-      disabled={maxBuyable.eq(0)}
-      onClick={() => buy()}
-    >
+    <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between">
         <h3 className="text-lg">{props.label}</h3>
         <div>Level: {level.toString()}</div>
@@ -53,6 +48,44 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
         </div>
         <div>Cost: {cost.one.toFixed(2)} Nisses</div>
       </div>
-    </Button>
+      <div className="flex gap-2">
+        <Button
+          className="flex flex-col"
+          fullWidth
+          disabled={maxBuyable.lt(1)}
+          onClick={() => buy(gameMath.bignumber(1))}
+        >
+          <div>x1</div>
+          <div>{cost.one.toFixed(2)} N</div>
+        </Button>
+        <Button
+          className="flex flex-col"
+          fullWidth
+          disabled={maxBuyable.lt(5)}
+          onClick={() => buy(gameMath.bignumber(5))}
+        >
+          <div>x5</div>
+          <div>{cost.five.toFixed(2)} N</div>
+        </Button>
+        <Button
+          className="flex flex-col"
+          fullWidth
+          disabled={maxBuyable.lt(25)}
+          onClick={() => buy(gameMath.bignumber(25))}
+        >
+          <div>x25</div>
+          <div>{cost.twentyFive.toFixed(2)} N</div>
+        </Button>
+        <Button
+          className="flex flex-col"
+          fullWidth
+          disabled={maxBuyable.lt(1)}
+          onClick={() => buy(maxBuyable)}
+        >
+          <div>Max (x{gameMath.format(maxBuyable)})</div>
+          <div>{cost.maxBuyable.toFixed(2)} N</div>
+        </Button>
+      </div>
+    </div>
   );
 }
