@@ -19,7 +19,7 @@ export default function ScoreDisplay() {
         {Duration.fromMillis(time.toNumber()).toFormat(
           "dd'd' hh'h' mm'm' ss's'"
         )}{" "}
-        ({gameMath.format(time, 2)} {timeDisplayName})
+        ({gameMath.format(time)} {timeDisplayName})
       </div>
     </div>
   );
