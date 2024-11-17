@@ -13,7 +13,7 @@ export default function UpgradesPage() {
     <div className="flex flex-col gap-2">
       <h1 className="text-2xl">Upgrades</h1>
       <h2 className="text-xl">Generator</h2>
-      <div className="flex justify-between gap-4">
+      <div className="flex justify-between gap-4 xl:flex-row flex-col">
         <div className="flex-grow">
           <UpgradeButton
             label="Gen Multiplier"
@@ -31,7 +31,7 @@ export default function UpgradesPage() {
       <h3 className="text-lg">
         You need to unlock both upgrades for Farmer to work!
       </h3>
-      <div className="flex justify-between gap-4">
+      <div className="flex justify-between gap-4 xl:flex-row flex-col">
         <div className="flex-grow">
           <UpgradeButton
             label="Farmer Multiplier"

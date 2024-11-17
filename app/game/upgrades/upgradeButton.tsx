@@ -36,7 +36,7 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 border border-gray-800 p-2">
       <div className="flex items-center justify-between">
         <h3 className="text-lg">{props.label}</h3>
         <div>Level: {level.toString()}</div>
