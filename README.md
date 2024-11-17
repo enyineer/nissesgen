@@ -1,6 +1,6 @@
-# NissesGen
+# Nisses Idle
 
-This is an idle Game dedicated to Nisses.
+This is an idle Game about Clocking in at your HomeOffice.
 
 > [!IMPORTANT]
 > This Game is unbalanced and not ready. Please contribute to balancing, functionality and UX!

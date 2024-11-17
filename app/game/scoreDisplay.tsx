@@ -1,13 +1,15 @@
 "use client";
 
-import { gameMath } from "../../gameMath";
-import { useScoreStore } from "../../stores/scoreStore";
+import { Duration } from "luxon";
+import useTime from "../../engine/useTime";
 
 export default function ScoreDisplay() {
-  const scoreStore = useScoreStore();
+  const { time } = useTime();
+
   return (
     <div className="text-xl text-right">
-      Current Nisses: {gameMath.format(scoreStore.score, 4)} Nisses
+      Time on Shift:{" "}
+      {Duration.fromMillis(time.toNumber()).toFormat("dd'd' hh'h' mm'm' ss's'")}
     </div>
   );
 }

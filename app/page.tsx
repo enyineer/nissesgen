@@ -4,7 +4,7 @@ import LinkButton from "../components/buttons/linkButton";
 export default function Home() {
   return (
     <div className="h-screen w-screen flex flex-col items-center justify-center gap-8">
-      <h1 className="text-2xl">Welcome to NissesGen!</h1>
+      <h1 className="text-2xl">Welcome to Nisses Idle!</h1>
       <div className="flex gap-4">
         <LinkButton href="/game">Go to Game</LinkButton>
         <LinkButton

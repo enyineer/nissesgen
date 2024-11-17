@@ -2,10 +2,11 @@ import { BigNumber } from "mathjs";
 import { createUpgradeStore } from "../stores/upgradeStore";
 import { useCallback, useMemo } from "react";
 import { gameMath } from "../gameMath";
-import { useScoreStore } from "../stores/scoreStore";
+import { CurrencyStore } from "../stores/currencyStore";
 
 type UseUpgradeProps = {
   name: string;
+  displayName: string;
   prefix: string;
   initialValues: {
     unlocked: boolean;
@@ -18,13 +19,14 @@ type UseUpgradeProps = {
     baseValue: BigNumber;
     upgradeValue: BigNumber;
   };
+  // Takes any CurrencyStore for upgrades to buy with
+  currencyStore: CurrencyStore;
 };
 
 export type Upgrade = ReturnType<typeof useUpgrade>;
 
 export function useUpgrade(props: UseUpgradeProps) {
-  const { initialValues, upgradeValues, name } = props;
-  const scoreStore = useScoreStore();
+  const { initialValues, upgradeValues, name, currencyStore } = props;
 
   const upgradeStore = createUpgradeStore({
     initialValues,
@@ -76,7 +78,7 @@ export function useUpgrade(props: UseUpgradeProps) {
   // According to https://blog.kongregate.com/the-math-of-idle-games-part-i/
   const maxBuyable = useMemo(() => {
     const logInner = gameMath.evaluate(
-      `((${scoreStore.score} * (${props.upgradeValues.costRate} - 1)) / (${props.upgradeValues.baseCost} * (${props.upgradeValues.costRate} ^ ${upgradeStore.level}))) + 1`
+      `((${currencyStore.amount} * (${props.upgradeValues.costRate} - 1)) / (${props.upgradeValues.baseCost} * (${props.upgradeValues.costRate} ^ ${upgradeStore.level}))) + 1`
     );
 
     const loggedByCostRate = (
@@ -87,7 +89,7 @@ export function useUpgrade(props: UseUpgradeProps) {
   }, [
     props.upgradeValues.baseCost,
     props.upgradeValues.costRate,
-    scoreStore.score,
+    currencyStore.amount,
     upgradeStore.level,
   ]);
 
@@ -98,27 +100,27 @@ export function useUpgrade(props: UseUpgradeProps) {
   const buy = useCallback(
     (amount: BigNumber = gameMath.bignumber("1")) => {
       const cost = calculateCost(amount);
-      if (scoreStore.score.gte(cost)) {
-        scoreStore.removeScore(cost);
+      if (currencyStore.amount.gte(cost)) {
+        currencyStore.subtract(cost);
         upgradeStore.addLevel(amount);
       }
     },
-    [calculateCost, scoreStore, upgradeStore]
+    [calculateCost, currencyStore, upgradeStore]
   );
 
   const unlock = useCallback(() => {
     if (
       !upgradeStore.unlocked &&
-      scoreStore.score.gte(upgradeValues.unlockCost)
+      currencyStore.amount.gte(upgradeValues.unlockCost)
     ) {
-      scoreStore.removeScore(upgradeValues.unlockCost);
+      currencyStore.subtract(upgradeValues.unlockCost);
       upgradeStore.unlock();
     }
-  }, [scoreStore, upgradeStore, upgradeValues.unlockCost]);
+  }, [currencyStore, upgradeStore, upgradeValues.unlockCost]);
 
   const unlockable = useMemo(() => {
-    return scoreStore.score.gte(upgradeValues.unlockCost);
-  }, [scoreStore, upgradeValues.unlockCost]);
+    return currencyStore.amount.gte(upgradeValues.unlockCost);
+  }, [currencyStore, upgradeValues.unlockCost]);
 
   return {
     reset: upgradeStore.reset,
@@ -137,5 +139,10 @@ export function useUpgrade(props: UseUpgradeProps) {
     value,
     buy,
     prefix: props.prefix,
+    currency: {
+      displayName: currencyStore.displayName,
+      amount: currencyStore.amount,
+    },
+    displayName: props.displayName,
   };
 }

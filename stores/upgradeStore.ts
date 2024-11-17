@@ -36,7 +36,7 @@ export const createUpgradeStore = (props: {
             })),
         }),
         {
-          name: `${props.name}-state`,
+          name: `${props.name}-upgrade-state`,
           version: 1,
           storage: storage,
         }

@@ -5,10 +5,10 @@ import { storage } from "./storage";
 import { gameMath } from "../gameMath";
 
 interface StatsState {
-  totalTime: BigNumber;
-  incrementTotalTime: (seconds: BigNumber) => void;
-  clicks: BigNumber;
-  incrementClicks: (clicks: BigNumber) => void;
+  realTime: BigNumber;
+  addRealTime: (ms: BigNumber) => void;
+  gameTime: BigNumber;
+  addGameTime: (ms: BigNumber) => void;
   reset: () => void;
 }
 
@@ -16,16 +16,16 @@ export const useStatsStore = create<StatsState>()(
   devtools(
     persist(
       (set) => ({
-        totalTime: gameMath.bignumber("0"),
-        incrementTotalTime: (seconds: BigNumber) =>
-          set((state) => ({ totalTime: state.totalTime.plus(seconds) })),
-        clicks: gameMath.bignumber("0"),
-        incrementClicks: (clicks: BigNumber) =>
-          set((state) => ({ clicks: state.clicks.plus(clicks) })),
+        realTime: gameMath.bignumber("0"),
+        addRealTime: (ms: BigNumber) =>
+          set((state) => ({ realTime: state.realTime.plus(ms) })),
+        gameTime: gameMath.bignumber("0"),
+        addGameTime: (ms: BigNumber) =>
+          set((state) => ({ gameTime: state.gameTime.plus(ms) })),
         reset: () =>
           set(() => ({
-            totalTime: gameMath.bignumber("0"),
-            clicks: gameMath.bignumber("0"),
+            realTime: gameMath.bignumber("0"),
+            gameTime: gameMath.bignumber("0"),
           })),
       }),
       {

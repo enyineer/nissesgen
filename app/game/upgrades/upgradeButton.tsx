@@ -3,7 +3,6 @@ import { gameMath } from "../../../gameMath";
 import { Upgrade } from "../../../engine/useUpgrade";
 
 type UpgradeButtonProps = {
-  label: string;
   upgrade: Upgrade;
 };
 
@@ -19,8 +18,9 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
     value,
     prefix,
     cost,
+    currency,
+    displayName,
   } = props.upgrade;
-  const label = props.label;
 
   if (!unlocked) {
     return (
@@ -30,7 +30,8 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
         disabled={!unlockable}
         onClick={() => unlock()}
       >
-        Unlock {label} for {gameMath.format(unlockCost)} Nisses
+        Unlock {displayName} for {gameMath.format(unlockCost)}{" "}
+        {currency.displayName}
       </Button>
     );
   }
@@ -38,7 +39,7 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
   return (
     <div className="flex flex-col gap-2 border border-gray-800 p-2">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg">{props.label}</h3>
+        <h3 className="text-lg">{displayName}</h3>
         <div>Level: {level.toString()}</div>
       </div>
       <div className="flex items-center justify-between">
