@@ -16,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Nisses Idle",
-  description: "Clock in at your work and get paid.",
+  title: "Nisses Idle Game",
+  description: "Clock in from your HomeOffice and get paid.",
 };
 
 export default function RootLayout({
