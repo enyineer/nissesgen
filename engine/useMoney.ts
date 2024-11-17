@@ -79,7 +79,7 @@ export default function useMoney() {
 
   const tick = useCallback(() => {
     moneyStore.add(tickValue);
-  }, [upgradeFactor]);
+  }, [moneyStore, tickValue]);
 
   return {
     money: moneyStore.amount,

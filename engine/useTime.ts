@@ -48,7 +48,7 @@ export default function useTime() {
 
   const tick = useCallback(() => {
     timeStore.add(tickValue);
-  }, [tickValue]);
+  }, [tickValue, timeStore]);
 
   return {
     time: timeStore.amount,
