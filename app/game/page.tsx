@@ -42,7 +42,7 @@ export default function GamePage() {
 
   useMemo(() => {
     updateTimes();
-  }, []);
+  }, [updateTimes]);
 
   useInterval(() => {
     updateTimes();
