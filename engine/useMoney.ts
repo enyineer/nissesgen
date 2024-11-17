@@ -7,6 +7,7 @@ import { useUpgrade } from "./useUpgrade";
 import { BigNumber } from "mathjs";
 import { MILLISECONDS_PER_TICK } from "./useGameEngine";
 import useNotification from "./useNotification";
+import useTime from "./useTime";
 
 export const MULTIPLIER_BASE = gameMath.bignumber("1");
 
@@ -21,6 +22,8 @@ export const CIGAR_MULTIPLIER_COST_RATE = gameMath.bignumber("1.09");
 export const BASE_WAGE = gameMath.bignumber("14");
 
 export default function useMoney() {
+  const { tickValue: timeTickValue } = useTime();
+
   const moneyStore = createCurrencyStore({
     name: "money",
     displayName: "N$",
@@ -87,9 +90,9 @@ export default function useMoney() {
       `${MILLISECONDS_PER_TICK} * 60 * 60`
     );
     return gameMath.evaluate(
-      `(${MILLISECONDS_PER_TICK} * ${upgradeFactor}) / ${hourFraction}`
+      `(${timeTickValue} * ${upgradeFactor}) / ${hourFraction}`
     );
-  }, [upgradeFactor]);
+  }, [timeTickValue, upgradeFactor]);
 
   const tick = useCallback(() => {
     moneyStore.add(tickValue);
