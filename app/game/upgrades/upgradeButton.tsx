@@ -58,7 +58,9 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
         >
           <div>Buy 1</div>
           <div>+{upgradeValues.upgradeValue.times(1).toFixed(2)}</div>
-          <div>{gameMath.format(cost.one, { precision: 4 })} N</div>
+          <div>
+            {gameMath.format(cost.one, { precision: 4 })} {currency.displayName}
+          </div>
         </Button>
         <Button
           className="flex flex-col"
@@ -68,7 +70,10 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
         >
           <div>Buy 5</div>
           <div>+{upgradeValues.upgradeValue.times(5).toFixed(2)}</div>
-          <div>{gameMath.format(cost.five, { precision: 4 })} N</div>
+          <div>
+            {gameMath.format(cost.five, { precision: 4 })}{" "}
+            {currency.displayName}
+          </div>
         </Button>
         <Button
           className="flex flex-col"
@@ -78,7 +83,10 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
         >
           <div>Buy 25</div>
           <div>+{upgradeValues.upgradeValue.times(25).toFixed(2)}</div>
-          <div>{gameMath.format(cost.twentyFive, { precision: 4 })} N</div>
+          <div>
+            {gameMath.format(cost.twentyFive, { precision: 4 })}{" "}
+            {currency.displayName}
+          </div>
         </Button>
         <Button
           className="flex flex-col"
@@ -88,7 +96,10 @@ export default function UpgradeButton(props: UpgradeButtonProps) {
         >
           <div>Buy Max ({gameMath.format(maxBuyable)})</div>
           <div>+{upgradeValues.upgradeValue.times(maxBuyable).toFixed(2)}</div>
-          <div>{gameMath.format(cost.maxBuyable, { precision: 4 })} N</div>
+          <div>
+            {gameMath.format(cost.maxBuyable, { precision: 4 })}{" "}
+            {currency.displayName}
+          </div>
         </Button>
       </div>
     </div>

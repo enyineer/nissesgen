@@ -89,5 +89,6 @@ export default function useMoney() {
     chocolateUpgrade,
     cigarUpgrade,
     upgradeFactor,
+    displayName: moneyStore.displayName,
   };
 }
