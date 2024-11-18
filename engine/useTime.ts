@@ -12,10 +12,10 @@ import { useTimeState } from "./useTimeState";
 
 export const TIME_MULTIPLIER_BASE = gameMath.bignumber("1");
 export const TIME_MULTIPLIER_PER_LEVEL = gameMath.bignumber("0.01");
-export const TIME_MULTIPLIER_BASE_COST = gameMath.bignumber("1000");
-export const TIME_MULTIPLIER_COST_RATE = gameMath.bignumber("1.07");
+export const TIME_MULTIPLIER_BASE_COST = gameMath.bignumber("10");
+export const TIME_MULTIPLIER_COST_RATE = gameMath.bignumber("1.04");
 // Unlock after 30 Minutes
-export const TIME_MULTIPLIER_UNLOCK_COST = gameMath.bignumber(1000 * 60 * 5);
+export const TIME_MULTIPLIER_UNLOCK_COST = gameMath.bignumber(10);
 
 export default function useTime() {
   const { scientistMessage } = useNotification();

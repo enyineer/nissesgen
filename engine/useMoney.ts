@@ -13,12 +13,12 @@ import { useMoneyState } from "./useMoneyState";
 
 export const MULTIPLIER_BASE = gameMath.bignumber("1");
 
-export const CHOCOLATE_MULTIPLIER_PER_LEVEL = gameMath.bignumber("0.05");
-export const CHOCOLATE_MULTIPLIER_BASE_COST = gameMath.bignumber("5");
+export const CHOCOLATE_MULTIPLIER_PER_LEVEL = gameMath.bignumber("0.25");
+export const CHOCOLATE_MULTIPLIER_BASE_COST = gameMath.bignumber("1");
 export const CHOCOLATE_MULTIPLIER_COST_RATE = gameMath.bignumber("1.07");
 
-export const CIGAR_MULTIPLIER_PER_LEVEL = gameMath.bignumber("0.15");
-export const CIGAR_MULTIPLIER_BASE_COST = gameMath.bignumber("10");
+export const CIGAR_MULTIPLIER_PER_LEVEL = gameMath.bignumber("0.5");
+export const CIGAR_MULTIPLIER_BASE_COST = gameMath.bignumber("5");
 export const CIGAR_MULTIPLIER_COST_RATE = gameMath.bignumber("1.09");
 
 export const BASE_WAGE = gameMath.bignumber("14");
@@ -82,19 +82,29 @@ export default function useMoney() {
 
   const upgradeFactor = useMemo<BigNumber>(() => {
     return gameMath.evaluate(
-      `${chocolateUpgrade.value} + ${cigarUpgrade.value} + 1`
+      `${chocolateUpgrade.value} * ${cigarUpgrade.value}`
     );
   }, [chocolateUpgrade.value, cigarUpgrade.value]);
 
   const tickValue = useMemo<BigNumber>(() => {
-    // hourFraction is the fraction of an hour that has passed since last tick
-    const hourFraction = gameMath.evaluate(
-      `${MILLISECONDS_PER_TICK} * 60 * 60`
+    // Calculates base wage per tick
+    const wageCoefficient = gameMath.evaluate(
+      `${BASE_WAGE} / 60 / 60 / (1000 / ${MILLISECONDS_PER_TICK})`
+    );
+    // Calculate coefficient based on game time per tick
+    const timeTickValueCoefficient = gameMath.evaluate(
+      `(${timeTickValue} / ${MILLISECONDS_PER_TICK})`
     );
     return gameMath.evaluate(
-      `(${timeTickValue} * ${upgradeFactor}) / ${hourFraction}`
+      `${timeTickValueCoefficient} * ${wageCoefficient} * ${upgradeFactor}`
     );
   }, [timeTickValue, upgradeFactor]);
+
+  const tickValuePerHour = useMemo<BigNumber>(() => {
+    return gameMath.evaluate(
+      `(${tickValue} / ${MILLISECONDS_PER_TICK}) * 1000 * 60 * 60`
+    );
+  }, [tickValue]);
 
   const tick = useCallback(
     (ticks: BigNumber) => {
@@ -106,6 +116,7 @@ export default function useMoney() {
   return {
     tick,
     tickValue,
+    tickValuePerHour,
     reset: () => {
       state.reset();
       chocolateUpgrade.reset();
