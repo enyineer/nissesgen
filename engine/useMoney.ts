@@ -35,7 +35,7 @@ export default function useMoney() {
     currencyStore: moneyStore,
     initialValues: {
       level: gameMath.bignumber("0"),
-      unlocked: true,
+      unlocked: false,
     },
     name: "money-multiplier-chocolate",
     prefix: "x",
@@ -44,7 +44,7 @@ export default function useMoney() {
       baseValue: MULTIPLIER_BASE,
       costRate: CHOCOLATE_MULTIPLIER_COST_RATE,
       upgradeValue: CHOCOLATE_MULTIPLIER_PER_LEVEL,
-      unlockCost: gameMath.bignumber(0),
+      unlockCost: CHOCOLATE_MULTIPLIER_BASE_COST,
     },
     displayName: "Chocolate Bars for Boss",
     onBuy: () => {
@@ -59,7 +59,7 @@ export default function useMoney() {
     currencyStore: moneyStore,
     initialValues: {
       level: gameMath.bignumber("0"),
-      unlocked: true,
+      unlocked: false,
     },
     name: "money-multiplier-chocolate",
     prefix: "x",
@@ -68,7 +68,7 @@ export default function useMoney() {
       baseValue: MULTIPLIER_BASE,
       costRate: CIGAR_MULTIPLIER_COST_RATE,
       upgradeValue: CIGAR_MULTIPLIER_PER_LEVEL,
-      unlockCost: gameMath.bignumber(0),
+      unlockCost: CIGAR_MULTIPLIER_BASE_COST,
     },
     displayName: "Cigar for Boss",
     onBuy: () => {
