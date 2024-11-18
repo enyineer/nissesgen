@@ -5,6 +5,21 @@ This is an idle Game about Clocking in at your HomeOffice.
 > [!IMPORTANT]
 > This Game is unbalanced and not ready. Please contribute to balancing, functionality and UX!
 
+## Current Ideas
+
+- Community-Feature Boosts
+  - NStagram
+    - Boosts time by a small fraction by posts created
+    - Shows posts by other community members
+  - NTube
+    - Boosts time by videos watched
+    - Add troll videos like RickRoll, 10 hour videos, ...
+- Prestige
+  - Allows to prestige by resetting money, upgrades and time on Shift
+  - Multiplies all other Multipliers
+  - Theme is "Start a new Job"
+- Achievements
+
 ## Getting Started
 
 Install NodeJS >=v20 and pnpm (`npm i -g pnpm`)
