@@ -10,14 +10,13 @@ export const MILLISECONDS_PER_TICK = gameMath.bignumber(100);
 export default function useGameEngine() {
   const statsStore = useStatsStore();
   const gameEngineStore = useGameEngineStore();
-  const { tick: tickTime } = useTime();
+  const { tick: tickTime, tickValue: timeTickValue } = useTime();
   const { tick: tickMoney } = useMoney();
 
   // Stats update Intervall
   useInterval(() => {
     statsStore.addRealTime(gameMath.bignumber("1000"));
-    // TODO: Add Time Gain Multiplier here
-    statsStore.addGameTime(gameMath.bignumber("1000"));
+    statsStore.addGameTime(timeTickValue);
   }, 1000);
 
   // Score Update
