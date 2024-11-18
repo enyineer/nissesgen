@@ -41,7 +41,7 @@ export default function UpgradeCard(props: UpgradeButtonProps) {
       );
     } else {
       return (
-        <div className="flex gap-2">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
           <Button
             className="flex flex-col"
             disabled={maxBuyable.lt(1)}
