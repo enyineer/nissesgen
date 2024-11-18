@@ -19,7 +19,7 @@ export default function UpgradesPage() {
           {gameMath.format(MILLISECONDS_PER_TICK)} ms)
         </h3>
         <h4 className="text-md font-bold">Make time go by faster</h4>
-        <div className="flex gap-2 xl:flex-row flex-col">
+        <div className="grid grid-cols-1 gap-2 xl:grid-cols-2">
           <UpgradeCard upgrade={time.timeMultiplierUpgrade} />
         </div>
       </div>
@@ -31,7 +31,7 @@ export default function UpgradesPage() {
         <h4 className="text-md font-bold">
           Bribe your boss and improve your wage
         </h4>
-        <div className="flex gap-2 xl:flex-row flex-col">
+        <div className="grid grid-cols-1 gap-2 xl:grid-cols-2">
           <UpgradeCard upgrade={money.chocolateUpgrade} />
           <UpgradeCard upgrade={money.cigarUpgrade} />
         </div>
