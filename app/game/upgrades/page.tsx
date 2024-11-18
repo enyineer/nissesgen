@@ -4,7 +4,7 @@ import { MILLISECONDS_PER_TICK } from "../../../engine/useGameEngine";
 import useMoney from "../../../engine/useMoney";
 import useTime from "../../../engine/useTime";
 import { gameMath } from "../../../gameMath";
-import UpgradeButton from "./upgradeButton";
+import UpgradeCard from "./upgradeCard";
 
 export default function UpgradesPage() {
   const time = useTime();
@@ -19,10 +19,8 @@ export default function UpgradesPage() {
           {gameMath.format(MILLISECONDS_PER_TICK)} ms)
         </h3>
         <h4 className="text-md font-bold">Make time go by faster</h4>
-        <div className="flex justify-between gap-4 xl:flex-row flex-col">
-          <div className="flex-grow">
-            <UpgradeButton upgrade={time.timeMultiplierUpgrade} />
-          </div>
+        <div className="flex gap-2 xl:flex-row flex-col">
+          <UpgradeCard upgrade={time.timeMultiplierUpgrade} />
         </div>
       </div>
       <div className="flex flex-col">
@@ -33,13 +31,9 @@ export default function UpgradesPage() {
         <h4 className="text-md font-bold">
           Bribe your boss and improve your wage
         </h4>
-        <div className="flex justify-between gap-4 xl:flex-row flex-col">
-          <div className="flex-grow">
-            <UpgradeButton upgrade={money.chocolateUpgrade} />
-          </div>
-          <div className="flex-grow">
-            <UpgradeButton upgrade={money.cigarUpgrade} />
-          </div>
+        <div className="flex gap-2 xl:flex-row flex-col">
+          <UpgradeCard upgrade={money.chocolateUpgrade} />
+          <UpgradeCard upgrade={money.cigarUpgrade} />
         </div>
       </div>
       <div className="text-center">

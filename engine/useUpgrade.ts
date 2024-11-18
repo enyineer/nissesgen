@@ -9,6 +9,7 @@ import { CurrencyStore } from "../stores/currencyStore";
 type UseUpgradeProps = {
   name: string;
   displayName: string;
+  imageSrc: string;
   prefix: string;
   initialValues: {
     unlocked: boolean;
@@ -155,5 +156,6 @@ export function useUpgrade(props: UseUpgradeProps) {
     },
     displayName: props.displayName,
     upgradeValues: props.upgradeValues,
+    imageSrc: props.imageSrc,
   };
 }

@@ -7,6 +7,7 @@ import { useUpgrade } from "./useUpgrade";
 import { BigNumber } from "mathjs";
 import { MILLISECONDS_PER_TICK } from "./useGameEngine";
 import useNotification from "./useNotification";
+import chronograph from "../images/chronograph.jpg";
 
 export const TIME_MULTIPLIER_BASE = gameMath.bignumber("1");
 export const TIME_MULTIPLIER_PER_LEVEL = gameMath.bignumber("0.01");
@@ -50,6 +51,7 @@ export default function useTime() {
           "Have a look at this new device! It makes time go by faster. But be cautious with it...",
       });
     },
+    imageSrc: chronograph.src,
   });
 
   const upgradeFactor = useMemo<BigNumber>(() => {

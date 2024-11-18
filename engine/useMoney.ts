@@ -8,6 +8,8 @@ import { BigNumber } from "mathjs";
 import { MILLISECONDS_PER_TICK } from "./useGameEngine";
 import useNotification from "./useNotification";
 import useTime from "./useTime";
+import chocolateBar from "../images/chocolate.jpg";
+import cigar from "../images/cigar.jpg";
 
 export const MULTIPLIER_BASE = gameMath.bignumber("1");
 
@@ -53,6 +55,7 @@ export default function useMoney() {
           "I love chocolate! How did you know? But now, get back to work!",
       });
     },
+    imageSrc: chocolateBar.src,
   });
 
   const cigarUpgrade = useUpgrade({
@@ -76,6 +79,7 @@ export default function useMoney() {
         message: "Only idiots would not smoke this! Ha!",
       });
     },
+    imageSrc: cigar.src,
   });
 
   const upgradeFactor = useMemo<BigNumber>(() => {
