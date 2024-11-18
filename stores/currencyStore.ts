@@ -3,6 +3,7 @@ import { BigNumber } from "mathjs";
 import { devtools, persist } from "zustand/middleware";
 import { storage } from "./storage";
 import { gameMath } from "../gameMath";
+import { CurrencyStores } from "./currencyStores";
 
 /**
  * According to https://zustand.docs.pmnd.rs/hooks/use-store#using-dynamic-global-vanilla-stores-in-react
@@ -54,11 +55,11 @@ const defaultCurrencyStores = new Map<
 const createCurrencyStoreFactory = (
   currencyStores: typeof defaultCurrencyStores
 ) => {
-  return (name: string, currencyProps: CurrencyProps) => {
-    if (!currencyStores.has(name)) {
-      currencyStores.set(name, createCurrencyStore(name, currencyProps));
+  return (key: CurrencyStores, currencyProps: CurrencyProps) => {
+    if (!currencyStores.has(key)) {
+      currencyStores.set(key, createCurrencyStore(key, currencyProps));
     }
-    return currencyStores.get(name)!;
+    return currencyStores.get(key)!;
   };
 };
 

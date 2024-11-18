@@ -2,7 +2,6 @@
 
 import { useCallback, useMemo } from "react";
 import { gameMath } from "../gameMath";
-import { getOrCreateCurrencyStoreByKey } from "../stores/currencyStore";
 import { useUpgrade } from "./useUpgrade";
 import { BigNumber } from "mathjs";
 import { MILLISECONDS_PER_TICK } from "./useGameEngine";
@@ -10,7 +9,7 @@ import useNotification from "./useNotification";
 import useTime from "./useTime";
 import chocolateBar from "../images/chocolate.jpg";
 import cigar from "../images/cigar.jpg";
-import { useStore } from "zustand";
+import { useMoneyState } from "./useMoneyState";
 
 export const MULTIPLIER_BASE = gameMath.bignumber("1");
 
@@ -24,22 +23,15 @@ export const CIGAR_MULTIPLIER_COST_RATE = gameMath.bignumber("1.09");
 
 export const BASE_WAGE = gameMath.bignumber("14");
 
-const displayName = "N$";
-
 export default function useMoney() {
   const { tickValue: timeTickValue } = useTime();
-
-  const moneyState = useStore(
-    getOrCreateCurrencyStoreByKey("money", {
-      amount: gameMath.bignumber("0"),
-    })
-  );
+  const { state, currencyDisplayName } = useMoneyState();
 
   const { bossMessage } = useNotification();
 
   const chocolateUpgrade = useUpgrade({
-    currencyState: moneyState,
-    currencyDisplayName: displayName,
+    currencyState: state,
+    currencyDisplayName: currencyDisplayName,
     initialValues: {
       level: gameMath.bignumber("0"),
       unlocked: false,
@@ -64,8 +56,8 @@ export default function useMoney() {
   });
 
   const cigarUpgrade = useUpgrade({
-    currencyState: moneyState,
-    currencyDisplayName: displayName,
+    currencyState: state,
+    currencyDisplayName: currencyDisplayName,
     initialValues: {
       level: gameMath.bignumber("0"),
       unlocked: false,
@@ -106,23 +98,21 @@ export default function useMoney() {
 
   const tick = useCallback(
     (ticks: BigNumber) => {
-      moneyState.add(gameMath.evaluate(`${tickValue} * ${ticks}`));
+      state.add(gameMath.evaluate(`${tickValue} * ${ticks}`));
     },
-    [moneyState, tickValue]
+    [state, tickValue]
   );
 
   return {
-    money: moneyState.amount,
     tick,
     tickValue,
     reset: () => {
-      moneyState.reset();
+      state.reset();
       chocolateUpgrade.reset();
       cigarUpgrade.reset();
     },
     chocolateUpgrade,
     cigarUpgrade,
     upgradeFactor,
-    displayName,
   };
 }
