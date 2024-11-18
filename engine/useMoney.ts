@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo } from "react";
 import { gameMath } from "../gameMath";
-import { createCurrencyStore } from "../stores/currencyStore";
+import { useCurrencyStore } from "../stores/currencyStore";
 import { useUpgrade } from "./useUpgrade";
 import { BigNumber } from "mathjs";
 import { MILLISECONDS_PER_TICK } from "./useGameEngine";
@@ -26,7 +26,7 @@ export const BASE_WAGE = gameMath.bignumber("14");
 export default function useMoney() {
   const { tickValue: timeTickValue } = useTime();
 
-  const moneyStore = createCurrencyStore({
+  const moneyStore = useCurrencyStore({
     name: "money",
     displayName: "N$",
   })();

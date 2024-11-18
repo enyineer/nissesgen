@@ -5,6 +5,9 @@ import { useMemo } from "react";
 import Image from "next/image";
 
 type UpgradeButtonProps = {
+  // TODO: VIOLATES HOOK RULE TO NOT PASS THROUGH USEEFFECTS! - IS BUGGY WHEN BUYING UPGRADE (does not deduct amount)
+  // TODO: MAYBE CREATE STORES FOR EACH UPGRADES BUT USE SLICES WITH SHARED STATECREATOR?
+  // https://zustand.docs.pmnd.rs/guides/typescript#slices-pattern
   upgrade: Upgrade;
 };
 

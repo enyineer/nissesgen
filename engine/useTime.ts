@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo } from "react";
 import { gameMath } from "../gameMath";
-import { createCurrencyStore } from "../stores/currencyStore";
+import { useCurrencyStore } from "../stores/currencyStore";
 import { useUpgrade } from "./useUpgrade";
 import { BigNumber } from "mathjs";
 import { MILLISECONDS_PER_TICK } from "./useGameEngine";
@@ -19,7 +19,7 @@ export const TIME_MULTIPLIER_UNLOCK_COST = gameMath.bignumber(1000 * 60 * 5);
 export default function useTime() {
   const { scientistMessage } = useNotification();
 
-  const timeStore = createCurrencyStore({
+  const timeStore = useCurrencyStore({
     name: "time",
     displayName: "ms",
   })();

@@ -16,13 +16,14 @@ interface CurrencyState {
 // https://github.com/pmndrs/zustand/issues/736
 class Wrapper {
   f() {
-    return createCurrencyStore({ name: "test", displayName: "Test" })();
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    return useCurrencyStore({ name: "test", displayName: "Test" })();
   }
 }
 
 export type CurrencyStore = ReturnType<Wrapper["f"]>;
 
-export const createCurrencyStore = (props: {
+export const useCurrencyStore = (props: {
   name: string;
   displayName: string;
   initialValues?: {
