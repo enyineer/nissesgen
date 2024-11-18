@@ -17,7 +17,9 @@ export default function useGameEngine() {
   // Stats update Intervall
   useInterval(() => {
     statsStore.addRealTime(gameMath.bignumber("1000"));
-    statsStore.addGameTime(timeTickValue);
+    statsStore.addGameTime(
+      gameMath.evaluate(`(${MILLISECONDS_PER_TICK} / ${timeTickValue}) * 1000`)
+    );
   }, 1000);
 
   // Score Update
