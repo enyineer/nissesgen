@@ -24,6 +24,7 @@ export default function SettingsPage() {
           money.reset();
           statsStore.reset();
           gameEngineStore.reset();
+          localStorage.clear();
           bossMessage({
             message: "You are fired!",
           });
