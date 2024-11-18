@@ -3,7 +3,7 @@
 This is an idle Game about Clocking in at your HomeOffice.
 
 > [!IMPORTANT]
-> This Game is unbalanced and not ready. Please contribute to balancing, functionality and UX!
+> This Game is unbalanced and not ready. Please contribute to balancing, functionality and UI/UX!
 
 ## Current Ideas
 
