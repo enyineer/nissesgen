@@ -39,6 +39,7 @@ export const useGameEngineStore = create<GameEngineState>()(
           set(() => ({ lastTick: lastTick })),
         reset: () =>
           set(() => ({
+            lastTick: null,
             clockedIn: false,
           })),
       }),
