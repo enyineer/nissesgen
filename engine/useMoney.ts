@@ -34,7 +34,7 @@ export default function useMoney() {
     currencyDisplayName: currencyDisplayName,
     initialValues: {
       level: gameMath.bignumber("0"),
-      unlocked: false,
+      unlocked: true,
     },
     name: "money-multiplier-chocolate",
     prefix: "x",
@@ -43,7 +43,7 @@ export default function useMoney() {
       baseValue: MULTIPLIER_BASE,
       costRate: CHOCOLATE_MULTIPLIER_COST_RATE,
       upgradeValue: CHOCOLATE_MULTIPLIER_PER_LEVEL,
-      unlockCost: CHOCOLATE_MULTIPLIER_BASE_COST,
+      unlockCost: gameMath.bignumber("0"),
     },
     displayName: "Chocolate Bar",
     onBuy: () => {
@@ -60,7 +60,7 @@ export default function useMoney() {
     currencyDisplayName: currencyDisplayName,
     initialValues: {
       level: gameMath.bignumber("0"),
-      unlocked: false,
+      unlocked: true,
     },
     name: "money-multiplier-cigar",
     prefix: "x",
@@ -69,7 +69,7 @@ export default function useMoney() {
       baseValue: MULTIPLIER_BASE,
       costRate: CIGAR_MULTIPLIER_COST_RATE,
       upgradeValue: CIGAR_MULTIPLIER_PER_LEVEL,
-      unlockCost: CIGAR_MULTIPLIER_BASE_COST,
+      unlockCost: gameMath.bignumber("0"),
     },
     displayName: "Cigar",
     onBuy: () => {
