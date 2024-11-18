@@ -48,7 +48,7 @@ export default function useMoney() {
       upgradeValue: CHOCOLATE_MULTIPLIER_PER_LEVEL,
       unlockCost: CHOCOLATE_MULTIPLIER_BASE_COST,
     },
-    displayName: "Chocolate Bars for Boss",
+    displayName: "Chocolate Bar",
     onBuy: () => {
       bossMessage({
         message:
@@ -73,7 +73,7 @@ export default function useMoney() {
       upgradeValue: CIGAR_MULTIPLIER_PER_LEVEL,
       unlockCost: CIGAR_MULTIPLIER_BASE_COST,
     },
-    displayName: "Cigar for Boss",
+    displayName: "Cigar",
     onBuy: () => {
       bossMessage({
         message: "Only idiots would not smoke this! Ha!",
