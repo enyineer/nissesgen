@@ -4,12 +4,14 @@ import Button from "../../../components/buttons/button";
 import useMoney from "../../../engine/useMoney";
 import useNotification from "../../../engine/useNotification";
 import useTime from "../../../engine/useTime";
+import { useGameEngineStore } from "../../../stores/gameEngineStore";
 import { useStatsStore } from "../../../stores/statsStore";
 
 export default function SettingsPage() {
   const time = useTime();
   const money = useMoney();
   const statsStore = useStatsStore();
+  const gameEngineStore = useGameEngineStore();
   const { bossMessage } = useNotification();
 
   return (
@@ -21,6 +23,7 @@ export default function SettingsPage() {
           time.reset();
           money.reset();
           statsStore.reset();
+          gameEngineStore.reset();
           bossMessage({
             message: "You are fired!",
           });
