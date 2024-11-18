@@ -112,15 +112,8 @@ export default function UpgradeCard(props: UpgradeButtonProps) {
   ]);
 
   return (
-    <div className="flex flex-col gap-2 border border-gray-800 p-2">
-      <div className="flex gap-2">
-        <Image
-          src={imageSrc}
-          width={100}
-          height={100}
-          alt="Image of upgrade"
-          className="rounded-full"
-        />
+    <div className="flex flex-col gap-4 border border-gray-800 p-2">
+      <div className="flex gap-2 justify-between">
         <div className="flex flex-col gap-2">
           <h3 className="text-lg">{displayName}</h3>
           <div>
@@ -129,6 +122,13 @@ export default function UpgradeCard(props: UpgradeButtonProps) {
           </div>
           <div>Level: {level.toString()}</div>
         </div>
+        <Image
+          src={imageSrc}
+          width={100}
+          height={100}
+          alt="Image of upgrade"
+          className="rounded-full"
+        />
       </div>
       {buttons}
     </div>
