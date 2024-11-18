@@ -13,7 +13,7 @@ export const TIME_MULTIPLIER_PER_LEVEL = gameMath.bignumber("0.01");
 export const TIME_MULTIPLIER_BASE_COST = gameMath.bignumber("1000");
 export const TIME_MULTIPLIER_COST_RATE = gameMath.bignumber("1.07");
 // Unlock after 30 Minutes
-export const TIME_MULTIPLIER_UNLOCK_COST = gameMath.bignumber(1000 * 60 * 30);
+export const TIME_MULTIPLIER_UNLOCK_COST = gameMath.bignumber(1000 * 60 * 5);
 
 export default function useTime() {
   const { scientistMessage } = useNotification();
@@ -36,7 +36,7 @@ export default function useTime() {
       baseValue: TIME_MULTIPLIER_BASE,
       costRate: TIME_MULTIPLIER_COST_RATE,
       upgradeValue: TIME_MULTIPLIER_PER_LEVEL,
-      unlockCost: gameMath.bignumber(TIME_MULTIPLIER_UNLOCK_COST),
+      unlockCost: TIME_MULTIPLIER_UNLOCK_COST,
     },
     displayName: "Time Multiplier",
     onBuy: () => {
@@ -68,7 +68,10 @@ export default function useTime() {
     time: timeStore.amount,
     tick,
     tickValue,
-    reset: timeStore.reset,
+    reset: () => {
+      timeStore.reset();
+      timeMultiplierUpgrade.reset();
+    },
     timeMultiplierUpgrade,
     upgradeFactor,
     displayName: timeStore.displayName,
