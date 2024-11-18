@@ -32,7 +32,6 @@ export default function useGameEngine() {
           )} - ${lastTick}) / ${MILLISECONDS_PER_TICK}`
         ) as BigNumber
       ).round();
-      console.log(ticksSinceLastTick);
       tickTime(ticksSinceLastTick);
       tickMoney(ticksSinceLastTick);
       gameEngineStore.setLastTick(gameMath.bignumber(Date.now()));
