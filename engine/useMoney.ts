@@ -62,7 +62,7 @@ export default function useMoney() {
       level: gameMath.bignumber("0"),
       unlocked: false,
     },
-    name: "money-multiplier-chocolate",
+    name: "money-multiplier-cigar",
     prefix: "x",
     upgradeValues: {
       baseCost: CIGAR_MULTIPLIER_BASE_COST,
