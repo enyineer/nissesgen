@@ -10,7 +10,7 @@ export default function ScoreDisplay() {
   const { money, displayName: moneyDisplayName } = useMoney();
 
   return (
-    <div className="flex justify-around">
+    <div className="grid lg:grid-cols-2">
       <div className="text-xl">
         Money: {money.toFixed(2)} {moneyDisplayName}
       </div>
@@ -19,7 +19,8 @@ export default function ScoreDisplay() {
         {Duration.fromMillis(time.toNumber()).toFormat(
           "dd'd' hh'h' mm'm' ss's'"
         )}{" "}
-        ({gameMath.format(time)} {timeDisplayName})
+        ({gameMath.format(time, { upperExp: 4, precision: 5 })}{" "}
+        {timeDisplayName})
       </div>
     </div>
   );
