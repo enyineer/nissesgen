@@ -102,7 +102,11 @@ export default function useMoney() {
     money: moneyStore.amount,
     tick,
     tickValue,
-    reset: moneyStore.reset,
+    reset: () => {
+      moneyStore.reset();
+      chocolateUpgrade.reset();
+      cigarUpgrade.reset();
+    },
     chocolateUpgrade,
     cigarUpgrade,
     upgradeFactor,
