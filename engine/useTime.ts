@@ -67,9 +67,12 @@ export default function useTime() {
     return gameMath.evaluate(`${MILLISECONDS_PER_TICK} * ${upgradeFactor}`);
   }, [upgradeFactor]);
 
-  const tick = useCallback(() => {
-    timeState.add(tickValue);
-  }, [tickValue, timeState]);
+  const tick = useCallback(
+    (ticks: BigNumber) => {
+      timeState.add(gameMath.evaluate(`${tickValue} * ${ticks}`));
+    },
+    [tickValue, timeState]
+  );
 
   return {
     time: timeState.amount,

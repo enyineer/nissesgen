@@ -4,6 +4,7 @@ import { useGameEngineStore } from "../stores/gameEngineStore";
 import { gameMath } from "../gameMath";
 import useTime from "./useTime";
 import useMoney from "./useMoney";
+import { BigNumber } from "mathjs";
 
 export const MILLISECONDS_PER_TICK = gameMath.bignumber(100);
 
@@ -22,8 +23,19 @@ export default function useGameEngine() {
   // Score Update
   useInterval(() => {
     if (gameEngineStore.clockedIn) {
-      tickTime();
-      tickMoney();
+      const lastTick =
+        gameEngineStore.lastTick ?? gameMath.bignumber(Date.now());
+      const ticksSinceLastTick = (
+        gameMath.evaluate(
+          `(${gameMath.bignumber(
+            Date.now()
+          )} - ${lastTick}) / ${MILLISECONDS_PER_TICK}`
+        ) as BigNumber
+      ).round();
+      console.log(ticksSinceLastTick);
+      tickTime(ticksSinceLastTick);
+      tickMoney(ticksSinceLastTick);
+      gameEngineStore.setLastTick(gameMath.bignumber(Date.now()));
     }
   }, MILLISECONDS_PER_TICK.toNumber());
 }

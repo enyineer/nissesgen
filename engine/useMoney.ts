@@ -104,9 +104,12 @@ export default function useMoney() {
     );
   }, [timeTickValue, upgradeFactor]);
 
-  const tick = useCallback(() => {
-    moneyState.add(tickValue);
-  }, [moneyState, tickValue]);
+  const tick = useCallback(
+    (ticks: BigNumber) => {
+      moneyState.add(gameMath.evaluate(`${tickValue} * ${ticks}`));
+    },
+    [moneyState, tickValue]
+  );
 
   return {
     money: moneyState.amount,
