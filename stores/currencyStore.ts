@@ -4,6 +4,10 @@ import { devtools, persist } from "zustand/middleware";
 import { storage } from "./storage";
 import { gameMath } from "../gameMath";
 
+/**
+ * According to https://zustand.docs.pmnd.rs/hooks/use-store#using-dynamic-global-vanilla-stores-in-react
+ */
+
 type CurrencyProps = {
   amount: BigNumber;
   displayName: string;

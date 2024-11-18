@@ -3,6 +3,10 @@ import { BigNumber } from "mathjs";
 import { devtools, persist } from "zustand/middleware";
 import { storage } from "./storage";
 
+/**
+ * According to https://zustand.docs.pmnd.rs/hooks/use-store#using-dynamic-global-vanilla-stores-in-react
+ */
+
 type UpgradeProps = {
   unlocked: boolean;
   level: BigNumber;
