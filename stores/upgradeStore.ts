@@ -1,45 +1,63 @@
-import { create } from "zustand";
+import { createStore } from "zustand";
 import { BigNumber } from "mathjs";
 import { devtools, persist } from "zustand/middleware";
 import { storage } from "./storage";
-import { gameMath } from "../gameMath";
 
-interface UpgradeState {
+type UpgradeProps = {
   unlocked: boolean;
-  unlock: () => void;
   level: BigNumber;
+};
+
+type UpgradeActions = {
+  unlock: () => void;
   addLevel: (levelToAdd: BigNumber) => void;
   reset: () => void;
-}
+};
 
-export const useUpgradeStore = (props: {
-  name: string;
-  initialValues?: {
-    level?: BigNumber;
-    unlocked?: boolean;
-  };
-}) =>
-  create<UpgradeState>()(
+export type UpgradeState = UpgradeProps & UpgradeActions;
+
+export type UpgradeStore = ReturnType<typeof createUpgradeStore>;
+
+const createUpgradeStore = (name: string, props: UpgradeProps) =>
+  createStore<UpgradeState>()(
     devtools(
       persist(
         (set) => ({
-          unlocked: props.initialValues?.unlocked ?? false,
+          unlocked: props.unlocked,
           unlock: () => set(() => ({ unlocked: true })),
-          level: props.initialValues?.level ?? gameMath.bignumber("0"),
+          level: props.level,
           addLevel: (levelToAdd: BigNumber) =>
             set((state) => ({ level: state.level.plus(levelToAdd) })),
           reset: () =>
             set(() => ({
-              level: props.initialValues?.level ?? gameMath.bignumber("0"),
-              exponentLevel: gameMath.bignumber("0"),
-              unlocked: props.initialValues?.unlocked ?? false,
+              level: props.level,
+              unlocked: props.unlocked,
             })),
         }),
         {
-          name: `${props.name}-upgrade-state`,
+          name: `${name}-upgrade-state`,
           version: 1,
           storage: storage,
         }
       )
     )
   );
+
+const defaultUpgradeStores = new Map<
+  string,
+  ReturnType<typeof createUpgradeStore>
+>();
+
+const createUpgradeStoreFactory = (
+  upgradeStores: typeof defaultUpgradeStores
+) => {
+  return (name: string, upgradeProps: UpgradeProps) => {
+    if (!upgradeStores.has(name)) {
+      upgradeStores.set(name, createUpgradeStore(name, upgradeProps));
+    }
+    return upgradeStores.get(name)!;
+  };
+};
+
+export const getOrCreateUpgradeStoreByKey =
+  createUpgradeStoreFactory(defaultUpgradeStores);

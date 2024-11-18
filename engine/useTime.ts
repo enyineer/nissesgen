@@ -2,12 +2,13 @@
 
 import { useCallback, useMemo } from "react";
 import { gameMath } from "../gameMath";
-import { useCurrencyStore } from "../stores/currencyStore";
+import { getOrCreateCurrencyStoreByKey } from "../stores/currencyStore";
 import { useUpgrade } from "./useUpgrade";
 import { BigNumber } from "mathjs";
 import { MILLISECONDS_PER_TICK } from "./useGameEngine";
 import useNotification from "./useNotification";
 import chronograph from "../images/chronograph.jpg";
+import { useStore } from "zustand";
 
 export const TIME_MULTIPLIER_BASE = gameMath.bignumber("1");
 export const TIME_MULTIPLIER_PER_LEVEL = gameMath.bignumber("0.01");
@@ -19,13 +20,15 @@ export const TIME_MULTIPLIER_UNLOCK_COST = gameMath.bignumber(1000 * 60 * 5);
 export default function useTime() {
   const { scientistMessage } = useNotification();
 
-  const timeStore = useCurrencyStore({
-    name: "time",
+  const timeStore = getOrCreateCurrencyStoreByKey("time", {
     displayName: "ms",
-  })();
+    amount: gameMath.bignumber("0"),
+  });
+
+  const timeState = useStore(timeStore);
 
   const timeMultiplierUpgrade = useUpgrade({
-    currencyStore: timeStore,
+    currencyState: timeState,
     initialValues: {
       level: gameMath.bignumber("0"),
       unlocked: false,
@@ -63,19 +66,19 @@ export default function useTime() {
   }, [upgradeFactor]);
 
   const tick = useCallback(() => {
-    timeStore.add(tickValue);
-  }, [tickValue, timeStore]);
+    timeState.add(tickValue);
+  }, [tickValue, timeState]);
 
   return {
-    time: timeStore.amount,
+    time: timeState.amount,
     tick,
     tickValue,
     reset: () => {
-      timeStore.reset();
+      timeState.reset();
       timeMultiplierUpgrade.reset();
     },
     timeMultiplierUpgrade,
     upgradeFactor,
-    displayName: timeStore.displayName,
+    displayName: timeState.displayName,
   };
 }

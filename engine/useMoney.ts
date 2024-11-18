@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo } from "react";
 import { gameMath } from "../gameMath";
-import { useCurrencyStore } from "../stores/currencyStore";
+import { getOrCreateCurrencyStoreByKey } from "../stores/currencyStore";
 import { useUpgrade } from "./useUpgrade";
 import { BigNumber } from "mathjs";
 import { MILLISECONDS_PER_TICK } from "./useGameEngine";
@@ -10,6 +10,7 @@ import useNotification from "./useNotification";
 import useTime from "./useTime";
 import chocolateBar from "../images/chocolate.jpg";
 import cigar from "../images/cigar.jpg";
+import { useStore } from "zustand";
 
 export const MULTIPLIER_BASE = gameMath.bignumber("1");
 
@@ -26,15 +27,17 @@ export const BASE_WAGE = gameMath.bignumber("14");
 export default function useMoney() {
   const { tickValue: timeTickValue } = useTime();
 
-  const moneyStore = useCurrencyStore({
-    name: "money",
-    displayName: "N$",
-  })();
+  const moneyState = useStore(
+    getOrCreateCurrencyStoreByKey("money", {
+      displayName: "Money",
+      amount: gameMath.bignumber("0"),
+    })
+  );
 
   const { bossMessage } = useNotification();
 
   const chocolateUpgrade = useUpgrade({
-    currencyStore: moneyStore,
+    currencyState: moneyState,
     initialValues: {
       level: gameMath.bignumber("0"),
       unlocked: false,
@@ -59,7 +62,7 @@ export default function useMoney() {
   });
 
   const cigarUpgrade = useUpgrade({
-    currencyStore: moneyStore,
+    currencyState: moneyState,
     initialValues: {
       level: gameMath.bignumber("0"),
       unlocked: false,
@@ -99,21 +102,21 @@ export default function useMoney() {
   }, [timeTickValue, upgradeFactor]);
 
   const tick = useCallback(() => {
-    moneyStore.add(tickValue);
-  }, [moneyStore, tickValue]);
+    moneyState.add(tickValue);
+  }, [moneyState, tickValue]);
 
   return {
-    money: moneyStore.amount,
+    money: moneyState.amount,
     tick,
     tickValue,
     reset: () => {
-      moneyStore.reset();
+      moneyState.reset();
       chocolateUpgrade.reset();
       cigarUpgrade.reset();
     },
     chocolateUpgrade,
     cigarUpgrade,
     upgradeFactor,
-    displayName: moneyStore.displayName,
+    displayName: moneyState.displayName,
   };
 }

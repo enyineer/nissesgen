@@ -37,7 +37,7 @@ importers:
         version: 17.5.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       zustand:
         specifier: ^5.0.1
-        version: 5.0.1(@types/react@18.3.12)(react@19.0.0-rc-66855b96-20241106)
+        version: 5.0.1(@types/react@18.3.12)(react@19.0.0-rc-66855b96-20241106)(use-sync-external-store@1.2.2(react@19.0.0-rc-66855b96-20241106))
     devDependencies:
       '@testing-library/dom':
         specifier: ^10.4.0
@@ -2867,6 +2867,11 @@ packages:
 
   url-parse@1.5.10:
     resolution: {integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==}
+
+  use-sync-external-store@1.2.2:
+    resolution: {integrity: sha512-PElTlVMwpblvbNqQ82d2n6RjStvdSoNe9FG28kNfz3WiXilJm4DdNkEzRhCZuIDwY8U08WVihhGR5iRqAwfDiw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
@@ -6351,6 +6356,11 @@ snapshots:
       querystringify: 2.2.0
       requires-port: 1.0.0
 
+  use-sync-external-store@1.2.2(react@19.0.0-rc-66855b96-20241106):
+    dependencies:
+      react: 19.0.0-rc-66855b96-20241106
+    optional: true
+
   util-deprecate@1.0.2: {}
 
   v8-compile-cache-lib@3.0.1: {}
@@ -6473,7 +6483,8 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zustand@5.0.1(@types/react@18.3.12)(react@19.0.0-rc-66855b96-20241106):
+  zustand@5.0.1(@types/react@18.3.12)(react@19.0.0-rc-66855b96-20241106)(use-sync-external-store@1.2.2(react@19.0.0-rc-66855b96-20241106)):
     optionalDependencies:
       '@types/react': 18.3.12
       react: 19.0.0-rc-66855b96-20241106
+      use-sync-external-store: 1.2.2(react@19.0.0-rc-66855b96-20241106)

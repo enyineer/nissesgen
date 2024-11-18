@@ -1,40 +1,30 @@
-import { create } from "zustand";
+import { createStore } from "zustand";
 import { BigNumber } from "mathjs";
 import { devtools, persist } from "zustand/middleware";
 import { storage } from "./storage";
 import { gameMath } from "../gameMath";
 
-interface CurrencyState {
+type CurrencyProps = {
   amount: BigNumber;
+  displayName: string;
+};
+
+type CurrencyActions = {
   add: (amount: BigNumber) => void;
   subtract: (amount: BigNumber) => void;
-  displayName: string;
   reset: () => void;
-}
+};
 
-// Workaround to export the type of the zustand store
-// https://github.com/pmndrs/zustand/issues/736
-class Wrapper {
-  f() {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    return useCurrencyStore({ name: "test", displayName: "Test" })();
-  }
-}
+export type CurrencyState = CurrencyProps & CurrencyActions;
 
-export type CurrencyStore = ReturnType<Wrapper["f"]>;
+export type CurrencyStore = ReturnType<typeof createCurrencyStore>;
 
-export const useCurrencyStore = (props: {
-  name: string;
-  displayName: string;
-  initialValues?: {
-    amount?: BigNumber;
-  };
-}) =>
-  create<CurrencyState>()(
+const createCurrencyStore = (name: string, props: CurrencyProps) =>
+  createStore<CurrencyState>()(
     devtools(
       persist(
         (set) => ({
-          amount: props.initialValues?.amount ?? gameMath.bignumber("0"),
+          amount: props.amount,
           add: (amount: BigNumber) =>
             set((state) => ({ amount: state.amount.plus(amount) })),
           subtract: (amount: BigNumber) =>
@@ -47,10 +37,30 @@ export const useCurrencyStore = (props: {
             })),
         }),
         {
-          name: `${props.name}-currency-state`,
+          name: `${name}-currency-state`,
           version: 1,
           storage: storage,
         }
       )
     )
   );
+
+const defaultCurrencyStores = new Map<
+  string,
+  ReturnType<typeof createCurrencyStore>
+>();
+
+const createCurrencyStoreFactory = (
+  currencyStores: typeof defaultCurrencyStores
+) => {
+  return (name: string, currencyProps: CurrencyProps) => {
+    if (!currencyStores.has(name)) {
+      currencyStores.set(name, createCurrencyStore(name, currencyProps));
+    }
+    return currencyStores.get(name)!;
+  };
+};
+
+export const getOrCreateCurrencyStoreByKey = createCurrencyStoreFactory(
+  defaultCurrencyStores
+);
