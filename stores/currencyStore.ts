@@ -10,7 +10,6 @@ import { gameMath } from "../gameMath";
 
 type CurrencyProps = {
   amount: BigNumber;
-  displayName: string;
 };
 
 type CurrencyActions = {
@@ -33,11 +32,9 @@ const createCurrencyStore = (name: string, props: CurrencyProps) =>
             set((state) => ({ amount: state.amount.plus(amount) })),
           subtract: (amount: BigNumber) =>
             set((state) => ({ amount: state.amount.minus(amount) })),
-          displayName: props.displayName,
           reset: () =>
             set(() => ({
               amount: gameMath.bignumber("0"),
-              displayName: props.displayName,
             })),
         }),
         {

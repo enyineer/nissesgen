@@ -25,6 +25,7 @@ type UseUpgradeProps = {
   };
   // Takes any CurrencyStore for upgrades to buy with
   currencyState: CurrencyState;
+  currencyDisplayName: string;
   onBuy?: (amount: BigNumber) => void;
   onUnlock?: () => void;
 };
@@ -32,7 +33,13 @@ type UseUpgradeProps = {
 export type Upgrade = ReturnType<typeof useUpgrade>;
 
 export function useUpgrade(props: UseUpgradeProps) {
-  const { initialValues, upgradeValues, name, currencyState } = props;
+  const {
+    initialValues,
+    upgradeValues,
+    name,
+    currencyState,
+    currencyDisplayName,
+  } = props;
 
   const upgradeStore = useStore(
     getOrCreateUpgradeStoreByKey(name, initialValues)
@@ -151,7 +158,7 @@ export function useUpgrade(props: UseUpgradeProps) {
     buy,
     prefix: props.prefix,
     currency: {
-      displayName: currencyState.displayName,
+      displayName: currencyDisplayName,
       amount: currencyState.amount,
     },
     displayName: props.displayName,

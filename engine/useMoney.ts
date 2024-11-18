@@ -24,12 +24,13 @@ export const CIGAR_MULTIPLIER_COST_RATE = gameMath.bignumber("1.09");
 
 export const BASE_WAGE = gameMath.bignumber("14");
 
+const displayName = "N$";
+
 export default function useMoney() {
   const { tickValue: timeTickValue } = useTime();
 
   const moneyState = useStore(
     getOrCreateCurrencyStoreByKey("money", {
-      displayName: "Money",
       amount: gameMath.bignumber("0"),
     })
   );
@@ -38,6 +39,7 @@ export default function useMoney() {
 
   const chocolateUpgrade = useUpgrade({
     currencyState: moneyState,
+    currencyDisplayName: displayName,
     initialValues: {
       level: gameMath.bignumber("0"),
       unlocked: false,
@@ -63,6 +65,7 @@ export default function useMoney() {
 
   const cigarUpgrade = useUpgrade({
     currencyState: moneyState,
+    currencyDisplayName: displayName,
     initialValues: {
       level: gameMath.bignumber("0"),
       unlocked: false,
@@ -117,6 +120,6 @@ export default function useMoney() {
     chocolateUpgrade,
     cigarUpgrade,
     upgradeFactor,
-    displayName: moneyState.displayName,
+    displayName,
   };
 }

@@ -17,11 +17,12 @@ export const TIME_MULTIPLIER_COST_RATE = gameMath.bignumber("1.07");
 // Unlock after 30 Minutes
 export const TIME_MULTIPLIER_UNLOCK_COST = gameMath.bignumber(1000 * 60 * 5);
 
+const displayName = "ms";
+
 export default function useTime() {
   const { scientistMessage } = useNotification();
 
   const timeStore = getOrCreateCurrencyStoreByKey("time", {
-    displayName: "ms",
     amount: gameMath.bignumber("0"),
   });
 
@@ -55,6 +56,7 @@ export default function useTime() {
       });
     },
     imageSrc: chronograph.src,
+    currencyDisplayName: displayName,
   });
 
   const upgradeFactor = useMemo<BigNumber>(() => {
@@ -79,6 +81,6 @@ export default function useTime() {
     },
     timeMultiplierUpgrade,
     upgradeFactor,
-    displayName: timeState.displayName,
+    displayName,
   };
 }
