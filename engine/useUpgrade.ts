@@ -1,7 +1,7 @@
 "use client";
 
 import { BigNumber } from "mathjs";
-import { createUpgradeStore } from "../stores/upgradeStore";
+import { useUpgradeStore } from "../stores/upgradeStore";
 import { useCallback, useMemo } from "react";
 import { gameMath } from "../gameMath";
 import { CurrencyStore } from "../stores/currencyStore";
@@ -33,7 +33,7 @@ export type Upgrade = ReturnType<typeof useUpgrade>;
 export function useUpgrade(props: UseUpgradeProps) {
   const { initialValues, upgradeValues, name, currencyStore } = props;
 
-  const upgradeStore = createUpgradeStore({
+  const upgradeStore = useUpgradeStore({
     initialValues,
     name,
   })();

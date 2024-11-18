@@ -12,7 +12,7 @@ interface UpgradeState {
   reset: () => void;
 }
 
-export const createUpgradeStore = (props: {
+export const useUpgradeStore = (props: {
   name: string;
   initialValues?: {
     level?: BigNumber;
